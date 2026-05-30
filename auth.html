@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grill | Авторизация и Регистрация</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="indexcss.css">
+</head>
+<body>
+    <div class="auth-page">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <h2>Grill</h2>
+                <p>Премиальные гриль-кухни</p>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Вход</button>
+                <button class="auth-tab" data-tab="register">Регистрация</button>
+            </div>
+
+            <div class="auth-message" id="authMessage"></div>
+
+            <!-- ФОРМА ВХОДА -->
+            <form class="auth-form active" id="loginForm" novalidate>
+                <div class="form-group">
+                    <label class="form-label">Email или Телефон</label>
+                    <input type="text" class="form-input" name="login" placeholder="example@mail.com или +375..." required>
+                    <div class="error-message" id="loginUserError">Введите email или телефон</div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Пароль</label>
+                    <input type="password" class="form-input" name="password" placeholder="Введите пароль" required>
+                    <div class="error-message" id="loginPassError">Введите пароль</div>
+                </div>
+                <button type="submit" class="auth-submit" id="loginSubmit">Войти</button>
+            </form>
+
+            <!-- ФОРМА РЕГИСТРАЦИИ -->
+            <form class="auth-form" id="registerForm" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Фамилия *</label>
+                        <input type="text" class="form-input" name="lastname" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Имя *</label>
+                        <input type="text" class="form-input" name="firstname" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Отчество</label>
+                    <input type="text" class="form-input" name="patronymic">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Дата рождения *</label>
+                    <input type="date" class="form-input" name="dob" required>
+                    <div class="error-message" id="regDobError">Вам должно быть не менее 16 лет</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Телефон (РБ) *</label>
+                    <input type="tel" class="form-input" name="phone" placeholder="+375 (__) ___-__-__" required>
+                    <div class="error-message" id="regPhoneError">Введите корректный номер РБ (+375)</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" class="form-input" name="email" placeholder="your@email.com" required>
+                    <div class="error-message" id="regEmailError">Введите корректный email</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Способ задания пароля</label>
+                    <div class="radio-group">
+                        <label class="radio-label"><input type="radio" name="passMethod" value="manual" checked> Самостоятельно</label>
+                        <label class="radio-label"><input type="radio" name="passMethod" value="auto"> Автоматически</label>
+                    </div>
+                </div>
+
+                <div id="manualPassFields">
+                    <div class="form-group">
+                        <label class="form-label">Пароль *</label>
+                        <input type="password" class="form-input" name="password" required>
+                        <div class="error-message" id="regPassError">8-20 символов: заглавная, строчная, цифра, спецсимвол. Не из топ-100.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Подтвердите пароль *</label>
+                        <input type="password" class="form-input" name="confirm_password" onpaste="return false" required>
+                        <div class="error-message" id="regConfirmError">Пароли не совпадают</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Никнейм</label>
+                    <div class="nickname-container">
+                        <input type="text" class="form-input" id="nicknameInput" readonly>
+                        <button type="button" class="btn-icon" id="regenNick" aria-label="Обновить никнейм">🔄</button>
+                        <input type="text" class="form-input" id="customNickInput" style="display:none;" placeholder="Введите никнейм (3-20 символов)">
+                    </div>
+                    <div class="error-message" id="regNickError">Минимум 3 символа, только латиница и цифры</div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="consent" required>
+                        <span>Я согласен с правилами и политикой конфиденциальности *</span>
+                    </label>
+                    <div class="error-message" id="regConsentError">Необходимо согласие для регистрации</div>
+                </div>
+
+                <button type="submit" class="auth-submit" id="registerSubmit">Зарегистрироваться</button>
+            </form>
+
+            <div class="auth-back">
+                <a href="index.html">← Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== ОБЩИЕ ЭЛЕМЕНТЫ =====
+        const tabs = document.querySelectorAll('.auth-tab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const authMessage = document.getElementById('authMessage');
+        const manualPassFields = document.getElementById('manualPassFields');
+        const regenNickBtn = document.getElementById('regenNick');
+        const nicknameInput = document.getElementById('nicknameInput');
+        const customNickInput = document.getElementById('customNickInput');
+
+        // ===== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК =====
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                const target = tab.dataset.tab;
+                loginForm.classList.toggle('active', target === 'login');
+                registerForm.classList.toggle('active', target === 'register');
+                authMessage.className = 'auth-message';
+                authMessage.textContent = '';
+                document.querySelectorAll('.error-message').forEach(e => e.classList.remove('visible'));
+                document.querySelectorAll('.form-input').forEach(i => i.classList.remove('error'));
+            });
+        });
+
+        // ===== СПОСОБ ПАРОЛЯ =====
+        document.querySelectorAll('input[name="passMethod"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                manualPassFields.style.display = e.target.value === 'manual' ? 'block' : 'none';
+            });
+        });
+
+        // ===== ГЕНЕРАЦИЯ НИКНЕЙМА =====
+        const prefixes = ['Grill', 'Fire', 'Smoke', 'Chef', 'Baron', 'King', 'Master', 'Pro', 'Elite', 'Urban'];
+        const suffixes = ['Kitchen', 'Griller', 'Smoker', 'Cook', 'Zone', 'House', 'Studio', 'Lab', 'Craft', 'Base'];
+        let regenCount = 0;
+
+        function generateNickname() {
+            const p = prefixes[Math.floor(Math.random() * prefixes.length)];
+            const s = suffixes[Math.floor(Math.random() * suffixes.length)];
+            const n = Math.floor(Math.random() * 900) + 100;
+            return `${p}${s}${n}`;
+        }
+
+        function updateNicknameUI() {
+            nicknameInput.value = generateNickname();
+            regenCount++;
+            if (regenCount >= 5) {
+                regenNickBtn.style.display = 'none';
+                customNickInput.style.display = 'block';
+                customNickInput.focus();
+            }
+        }
+
+        regenNickBtn.addEventListener('click', updateNicknameUI);
+        updateNicknameUI(); // Первая генерация при загрузке
+
+        // ===== МАСКА ТЕЛЕФОНА РБ =====
+        const phoneInput = document.querySelector('input[name="phone"]');
+        phoneInput.addEventListener('input', (e) => {
+            let val = e.target.value.replace(/\D/g, '');
+            if (!val.startsWith('375')) val = '375' + val;
+            let formatted = '+375';
+            if (val.length > 3) formatted += ' (' + val.substring(3, 5);
+            if (val.length > 5) formatted += ') ' + val.substring(5, 8);
+            if (val.length > 8) formatted += '-' + val.substring(8, 10);
+            if (val.length > 10) formatted += '-' + val.substring(10, 12);
+            e.target.value = formatted;
+        });
+
+        // ===== УТИЛИТЫ =====
+        function showMessage(type, text) {
+            authMessage.className = `auth-message ${type}`;
+            authMessage.textContent = text;
+        }
+        function showInputError(name, show) {
+            const input = document.querySelector(`input[name="${name}"]`);
+            const error = document.getElementById(`${name}Error`);
+            if (input) input.classList.toggle('error', show);
+            if (error) error.classList.toggle('visible', show);
+        }
+
+        // ТОП-100 ПАРОЛЕЙ 2023 (СОКРАЩЁННЫЙ СПИСОК ДЛЯ ПРОВЕРКИ)
+        const badPasswords = new Set([
+            '123456','password','qwerty','12345678','12345','123456789','football','shadow','sunshine','princess',
+            'trustno1','iloveyou','batman','welcome','login','starwars','letmein','dragon','master','monkey',
+            'abc123','admin','admin123','passw0rd','p@ssword','qwerty123','1234567','password1','1q2w3e4r','1q2w3e4r5t',
+            'qazwsx','zaq12wsx','monkey123','123123','test','pass','guest','master123','changeme','123321','654321',
+            'qwerty1','asdfgh','zxcvbn','1234qwer','qwer1234','p@$$w0rd','hello','charlie','donald','password123',
+            'qwertyuiop','123456a','1234567a','abc12345','password12','12345678a','a1234567','123456789a','zxcvbnm',
+            'asdfghjkl','poiuytrewq','0987654321','qazxswedc','1qaz2wsx','1234567890','12345678910','111111','000000',
+            '666666','888888','999999','777777','555555','444444','333333','222222','112233','121212','123123','123456789',
+            'qwerty','abc123','monkey','1234567','letmein','trustno1','dragon','baseball','master','michael','football',
+            'password1','iloveyou','shadow','sunshine','princess','access','harley','ranger','buster','soccer','jordan',
+            'batman','superman','hannah','amanda','jessica','pepper','daniel','andrew','joshua','alexander'
+        ]);
+
+        // ===== РЕГИСТРАЦИЯ =====
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            let hasError = false;
+
+            const formData = new FormData(registerForm);
+            const data = {};
+            formData.forEach((val, key) => data[key] = val);
+
+            // Валидация ФИО
+            if (!data.lastname.trim() || !data.firstname.trim()) {
+                showInputError('lastname', true); showInputError('firstname', true); hasError = true;
+            } else {
+                showInputError('lastname', false); showInputError('firstname', false);
+            }
+
+            // Валидация возраста (>= 16)
+            if (data.dob) {
+                const age = Math.floor((new Date() - new Date(data.dob)) / (365.25 * 24 * 60 * 60 * 1000));
+                if (age < 16) { showInputError('dob', true); hasError = true; }
+                else showInputError('dob', false);
+            } else { showInputError('dob', true); hasError = true; }
+
+            // Валидация телефона РБ
+            const phoneRegex = /^\+375\s?\(?[1234]\d{2}\)?\s?\d{3}[-\s]?\d{2}[-\s]?\d{2}$/;
+            if (!phoneRegex.test(data.phone)) { showInputError('phone', true); hasError = true; }
+            else showInputError('phone', false);
+
+            // Валидация Email
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) { showInputError('email', true); hasError = true; }
+            else showInputError('email', false);
+
+            // Валидация Пароля
+            if (data.passMethod === 'manual') {
+                const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+                if (!passRegex.test(data.password)) { showInputError('password', true); hasError = true; }
+                else showInputError('password', false);
+
+                if (data.password !== data.confirm_password) { showInputError('confirm_password', true); hasError = true; }
+                else showInputError('confirm_password', false);
+
+                if (badPasswords.has(data.password.toLowerCase())) {
+                    showMessage('error', 'Пароль слишком распространённый. Выберите другой.');
+                    hasError = true;
+                }
+            } else {
+                // Автогенерация пароля
+                data.password = Math.random().toString(36).slice(-10) + 'A1!';
+                data.confirm_password = data.password;
+            }
+
+            // Валидация Никнейма
+            let nickname = customNickInput.style.display === 'block' ? customNickInput.value : nicknameInput.value;
+            if (nickname.length < 3 || !/^[a-zA-Z0-9_]+$/.test(nickname)) {
+                document.getElementById('regNickError').classList.add('visible'); hasError = true;
+            } else {
+                document.getElementById('regNickError').classList.remove('visible');
+            }
+            data.nickname = nickname;
+
+            // Согласие
+            if (!data.consent) { document.getElementById('regConsentError').classList.add('visible'); hasError = true; }
+            else document.getElementById('regConsentError').classList.remove('visible');
+
+            if (hasError) return;
+
+            const btn = document.getElementById('registerSubmit');
+            btn.disabled = true; btn.textContent = 'Регистрация...';
+
+            try {
+                const res = await fetch('auth.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ action: 'register', ...data })
+                });
+                const result = await res.json();
+                if (result.success) {
+                    showMessage('success', 'Регистрация успешна! Теперь войдите.');
+                    setTimeout(() => { tabs[0].click(); }, 2000);
+                } else showMessage('error', result.message);
+            } catch { showMessage('error', 'Ошибка соединения'); }
+            btn.disabled = false; btn.textContent = 'Зарегистрироваться';
+        });
+
+        // ===== ВХОД =====
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const login = loginForm.login.value.trim();
+            const pass = loginForm.password.value;
+            let err = false;
+            if (!login) { showInputError('login', true); err = true; } else showInputError('login', false);
+            if (!pass) { showInputError('password', true); err = true; } else showInputError('password', false);
+            if (err) return;
+
+            const btn = document.getElementById('loginSubmit');
+            btn.disabled = true; btn.textContent = 'Входим...';
+            try {
+                const res = await fetch('auth.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ action: 'login', login: login, password: pass })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showMessage('success', 'Успешный вход! Перенаправляем...');
+                    setTimeout(() => window.location.href = 'index.html', 1500);
+                } else showMessage('error', data.message);
+            } catch { showMessage('error', 'Ошибка соединения'); }
+            btn.disabled = false; btn.textContent = 'Войти';
+        });
+
+        // Сброс ошибок при вводе
+        document.querySelectorAll('.form-input').forEach(inp => {
+            inp.addEventListener('input', function() {
+                this.classList.remove('error');
+                const errEl = this.parentElement.querySelector('.error-message');
+                if (errEl) errEl.classList.remove('visible');
+            });
+        });
+    </script>
+</body>
+</html>

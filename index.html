@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grill | Премиальные гриль-кухни</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="indexcss.css">
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header class="header">
+        <div class="container header__inner">
+            <nav class="nav" id="nav">
+                <ul class="nav__list">
+                    <li><a href="#works" class="nav__link">Состав работ</a></li>
+                    <li><a href="#calc" class="nav__link">Рассчитать</a></li>
+                    <li><a href="#portfolio" class="nav__link">Наши работы</a></li>
+                    <li><a href="#video" class="nav__link">Видеообзор</a></li>
+                    <li><a href="#reviews" class="nav__link">Отзывы</a></li>
+                </ul>
+            </nav>
+            <div class="header__contacts">
+                <a href="tel:+73333333333" class="header__phone">+7 333 333 33 33</a>
+                <a href="auth.html" class="header__auth-link">Войти</a>
+                
+                <!-- Кнопка смены темы -->
+                <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
+                    <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <a href="#callback" class="btn btn--primary">Заказать звонок</a>
+            </div>
+            <button class="burger" id="burger" aria-label="Открыть меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero">
+        <div class="hero__bg">
+            <img src="images/bg_main.jpg" alt="Интерьер премиальной гриль-кухни" class="hero__img">
+        </div>
+        
+        <div class="hero__content">
+            <h1 class="hero__title">Премиальные<br>гриль-кухни</h1>
+            <p class="hero__subtitle">Проектирование. Изготовление. Установка.</p>
+        </div>
+
+        <div class="hero__actions">
+            <a href="tel:+73333333333" class="action-btn">
+                <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+                Заказать звонок
+            </a>
+            <a href="#" class="action-btn">
+                <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 1 0 24 12.056A12.01 12.01 0 0 0 11.944 0Zm5.65 8.12-1.72 8.12c-.13.58-.47.72-.95.45l-2.64-1.95-1.27 1.22c-.14.14-.26.26-.53.26l.19-2.67 4.86-4.39c.21-.19-.05-.29-.33-.11l-6 3.79-2.58-.81c-.56-.18-.57-.56.12-.83l10.08-3.89c.47-.17.88.11.73.83Z"/></svg>
+                Telegram
+            </a>
+            <a href="#" class="action-btn">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+                Whatsapp
+            </a>
+        </div>
+
+        <div class="hero__scroll">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+
+        <div class="floating-btns">
+            <a href="tel:+73333333333" class="floating-btn">
+                <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+            </a>
+            <a href="#calendar" class="floating-btn">
+                <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ПРЕИМУЩЕСТВА -->
+    <section class="advantages">
+        <div class="container">
+            <h2 class="section-title">Преимущества</h2>
+            <div class="advantages__wrapper">
+                <span class="advantages__bg-text">Преимущества</span>
+                <div class="advantages__card">
+                    <div class="advantages__item">
+                        <div class="advantages__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9 12l2 2 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="advantages__item-title">Открытые и закрытые зоны</h3>
+                        <p class="advantages__item-text">Гриль-кухни можно устанавливать на открытых и закрытых площадках</p>
+                    </div>
+                    <div class="advantages__item">
+                        <div class="advantages__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9 12l2 2 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="advantages__item-title">Выбор конфигурации</h3>
+                        <p class="advantages__item-text">Проектируем и изготавливаем кухни любой геометрической формы</p>
+                    </div>
+                    <div class="advantages__item">
+                        <div class="advantages__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9 12l2 2 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="advantages__item-title">Встроенная бытовая техника</h3>
+                        <p class="advantages__item-text">Подготавливаем модули под любую встроенную технику</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- СОСТАВ РАБОТ -->
+    <section class="scope" id="works">
+        <div class="container">
+            <h2 class="section-title">Состав работ</h2>
+            
+            <div class="scope__wrapper">
+                <div class="scope__steps">
+                    <div class="scope__step active" data-index="0">
+                        <span class="scope__number">1</span>
+                        <span class="scope__label">Выбор конфигурации</span>
+                    </div>
+                    <div class="scope__line"></div>
+                    <div class="scope__step" data-index="1">
+                        <span class="scope__number">2</span>
+                        <span class="scope__label">Выбор материала и цвета</span>
+                    </div>
+                    <div class="scope__line"></div>
+                    <div class="scope__step" data-index="2">
+                        <span class="scope__number">3</span>
+                        <span class="scope__label">Дизайн-проект и изготовление</span>
+                    </div>
+                    <div class="scope__line"></div>
+                    <div class="scope__step" data-index="3">
+                        <span class="scope__number">4</span>
+                        <span class="scope__label">Установка</span>
+                    </div>
+                </div>
+
+                <div class="scope__slider">
+                    <button class="scope__arrow scope__arrow--prev">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    
+                    <div class="scope__content">
+                        <img src="images/slider1.png" alt="Шаг 1" class="scope__img" id="scopeImg">
+                        <div class="scope__overlay">
+                            <div class="scope__text">
+                                <h3 class="scope__slide-title" id="scopeTitle">Выбор конфигурации</h3>
+                                <p class="scope__slide-desc" id="scopeDesc">На первом этапе работы мы помогаем определиться с формой кухни, количеством и наполнением каждого модуля. Предусматриваем блоки под установку грилей и встраиваемой бытовой техники.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="scope__arrow scope__arrow--next">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРЕДВАРИТЕЛЬНЫЙ РАСЧЁТ -->
+    <section class="calculator" id="calc">
+        <div class="container">
+            <h2 class="section-title">Предварительный расчёт</h2>
+            <p class="calculator__desc">Предлагаем вам посмотреть на внешний вид вашей будущей гриль-кухни и получить предварительный расчет стоимости изготовления. Ваши персональные данные не потребуются.<br>Выберите соответствующие характеристики гриль-кухни:</p>
+            
+            <div class="calculator__card">
+                <div class="calculator__image">
+                    <img src="images/246.jpg" alt="Гриль-кухня" class="calculator__img">
+                </div>
+                
+                <div class="calculator__content">
+                    <div class="calculator__row">
+                        <div class="calculator__group">
+                            <h3 class="calculator__group-title">Материал фасада</h3>
+                            <div class="calculator__options">
+                                <label class="calculator__option">
+                                    <input type="radio" name="material" value="steel" checked>
+                                    <span class="calculator__radio"></span>
+                                    <span class="calculator__label">нержавеющая сталь</span>
+                                </label>
+                                <label class="calculator__option">
+                                    <input type="radio" name="material" value="composite">
+                                    <span class="calculator__radio"></span>
+                                    <span class="calculator__label">композит</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="calculator__group">
+                            <h3 class="calculator__group-title">Тип размещения</h3>
+                            <div class="calculator__options">
+                                <label class="calculator__option">
+                                    <input type="radio" name="placement" value="open" checked>
+                                    <span class="calculator__radio"></span>
+                                    <span class="calculator__label">открытая терраса</span>
+                                </label>
+                                <label class="calculator__option">
+                                    <input type="radio" name="placement" value="closed">
+                                    <span class="calculator__radio"></span>
+                                    <span class="calculator__label">закрытая терраса</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="calculator__group">
+                            <h3 class="calculator__group-title">Размер</h3>
+                            <div class="calculator__options">
+                                <label class="calculator__option">
+                                    <input type="radio" name="size" value="2.2" checked>
+                                    <span class="calculator__radio"></span>
+                                    <span class="calculator__label">2,2 п.м</span>
+                                </label>
+                                <label class="calculator__option">
+                                    <input type="radio" name="size" value="2.8">
+                                    <span class="calculator__radio"></span>
+                                    <span class="calculator__label">2,8 п.м</span>
+                                </label>
+                                <label class="calculator__option">
+                                    <input type="radio" name="size" value="3+">
+                                    <span class="calculator__radio"></span>
+                                    <span class="calculator__label">более 3 п.м</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calculator__group calculator__group--full">
+                        <h3 class="calculator__group-title">Конфигурация</h3>
+                        <div class="calculator__options calculator__options--horizontal">
+                            <label class="calculator__option">
+                                <input type="radio" name="config" value="straight" checked>
+                                <span class="calculator__radio"></span>
+                                <span class="calculator__label">Прямая</span>
+                            </label>
+                            <label class="calculator__option">
+                                <input type="radio" name="config" value="corner">
+                                <span class="calculator__radio"></span>
+                                <span class="calculator__label">Угловая</span>
+                            </label>
+                            <label class="calculator__option">
+                                <input type="radio" name="config" value="u-shape">
+                                <span class="calculator__radio"></span>
+                                <span class="calculator__label">П-образная</span>
+                            </label>
+                            <label class="calculator__option">
+                                <input type="radio" name="config" value="island">
+                                <span class="calculator__radio"></span>
+                                <span class="calculator__label">С островком</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="calculator__buttons">
+                        <button type="button" class="btn btn--primary btn--large">Получить расчёт</button>
+                        <button type="button" class="btn btn--outline btn--large">Связь с менеджером</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- НАШИ РАБОТЫ -->
+    <section class="portfolio-full" id="portfolio">
+        <div class="portfolio-full__header">
+            <h2 class="section-title">Наши работы</h2>
+        </div>
+
+        <div class="portfolio-full__slider" id="portfolioSlider">
+            <button class="portfolio-full__arrow portfolio-full__arrow--prev" aria-label="Предыдущая работа">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
+            </button>
+
+            <div class="portfolio-full__track" id="portfolioTrack">
+                <div class="portfolio-full__slide active">
+                    <img src="images/photo31475.png" alt="Гриль-кухня из композитного материала" class="portfolio-full__img">
+                    <div class="portfolio-full__overlay">
+                        <div class="portfolio-full__card">
+                            <h3 class="portfolio-full__card-title">Гриль-кухня<br>из композитного материала</h3>
+                            <ul class="portfolio-full__specs">
+                                <li><span>Материал:</span> <strong>композитный HPL</strong></li>
+                                <li><span>Тип размещения:</span> <strong>закрытая терраса</strong></li>
+                                <li><span>Конфигурация:</span> <strong>прямая</strong></li>
+                            </ul>
+                            <p class="portfolio-full__note">* Оборудование и столешницы не входят в стоимость кухни</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-full__slide">
+                    <img src="images/photo31475.png" alt="Гриль-кухня из нержавеющей стали" class="portfolio-full__img">
+                    <div class="portfolio-full__overlay">
+                        <div class="portfolio-full__card">
+                            <h3 class="portfolio-full__card-title">Гриль-кухня<br>из нержавеющей стали</h3>
+                            <ul class="portfolio-full__specs">
+                                <li><span>Материал:</span> <strong>нержавеющая сталь</strong></li>
+                                <li><span>Тип размещения:</span> <strong>открытая терраса</strong></li>
+                                <li><span>Конфигурация:</span> <strong>угловая</strong></li>
+                            </ul>
+                            <p class="portfolio-full__note">* Оборудование и столешницы не входят в стоимость кухни</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-full__slide">
+                    <img src="images/photo31475.png" alt="Гриль-кухня с островом" class="portfolio-full__img">
+                    <div class="portfolio-full__overlay">
+                        <div class="portfolio-full__card">
+                            <h3 class="portfolio-full__card-title">Гриль-кухня<br>с островком</h3>
+                            <ul class="portfolio-full__specs">
+                                <li><span>Материал:</span> <strong>композит + дерево</strong></li>
+                                <li><span>Тип размещения:</span> <strong>открытая площадка</strong></li>
+                                <li><span>Конфигурация:</span> <strong>с островком</strong></li>
+                            </ul>
+                            <p class="portfolio-full__note">* Оборудование и столешницы не входят в стоимость кухни</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-full__slide">
+                    <img src="images/photo31475.png" alt="П-образная гриль-кухня" class="portfolio-full__img">
+                    <div class="portfolio-full__overlay">
+                        <div class="portfolio-full__card">
+                            <h3 class="portfolio-full__card-title">П-образная<br>гриль-кухня</h3>
+                            <ul class="portfolio-full__specs">
+                                <li><span>Материал:</span> <strong>нержавеющая сталь</strong></li>
+                                <li><span>Тип размещения:</span> <strong>закрытая терраса</strong></li>
+                                <li><span>Конфигурация:</span> <strong>П-образная</strong></li>
+                            </ul>
+                            <p class="portfolio-full__note">* Оборудование и столешницы не входят в стоимость кухни</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="portfolio-full__arrow portfolio-full__arrow--next" aria-label="Следующая работа">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+            </button>
+
+            <div class="portfolio-full__pagination" id="portfolioPagination">
+                <span class="portfolio-full__dot active" data-index="0"></span>
+                <span class="portfolio-full__dot" data-index="1"></span>
+                <span class="portfolio-full__dot" data-index="2"></span>
+                <span class="portfolio-full__dot" data-index="3"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ВИДЕООБЗОР -->
+    <section class="video-section" id="video">
+        <div class="container">
+            <h2 class="section-title">Видеообзор</h2>
+            <div class="video-section__wrapper">
+                <span class="video-section__bg-text">Видеообзор</span>
+                <div class="video-section__container">
+                    <img src="images/video.png" alt="Видеообзор гриль-кухни" class="video-section__placeholder">
+                    <div class="video-section__play-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ОТЗЫВЫ -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <h2 class="section-title">Отзывы наших клиентов</h2>
+            
+            <div class="reviews__slider">
+                <button class="reviews__arrow reviews__arrow--prev" aria-label="Назад">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+
+                <div class="reviews__track">
+                    <div class="reviews__card">
+                        <div class="reviews__image">
+                            <img src="images/1отзыв.jpg" alt="Отзыв Дмитрия" class="reviews__img">
+                        </div>
+                        <div class="reviews__content">
+                            <h3 class="reviews__name">Дмитрий К.</h3>
+                            <p class="reviews__text">Отличная кухня, быстро договорились, произвели замеры и разработали проект! Отличная компания!</p>
+                            <a href="#" class="reviews__link">Подробнее <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                        </div>
+                    </div>
+
+                    <div class="reviews__card">
+                        <div class="reviews__image">
+                            <img src="images/2отзыв.jpg" alt="Отзыв Сергея" class="reviews__img">
+                        </div>
+                        <div class="reviews__content">
+                            <h3 class="reviews__name">Сергей В.</h3>
+                            <p class="reviews__text">Отличная кухня, быстро договорились, произвели замеры и разработали проект! Отличная компания!</p>
+                            <a href="#" class="reviews__link">Подробнее <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                        </div>
+                    </div>
+
+                    <div class="reviews__card">
+                        <div class="reviews__image">
+                            <img src="images/3отзыв.jpg" alt="Отзыв Андрея" class="reviews__img">
+                        </div>
+                        <div class="reviews__content">
+                            <h3 class="reviews__name">Андрей К.</h3>
+                            <p class="reviews__text">Отличная кухня, быстро договорились, произвели замеры и разработали проект! Отличная компания!</p>
+                            <a href="#" class="reviews__link">Подробнее <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="reviews__arrow reviews__arrow--next" aria-label="Вперёд">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script src="Untitled-1.js" defer></script>
+</body>
+</html>
