@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы | Grill</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="indexcss.css">
+    <link rel="stylesheet" href="reviews.css">
+</head>
+<body>
+
+<!-- ШАПКА -->
+<header class="header header--static">
+    <div class="container header__inner">
+        <button class="header-menu-btn" id="headerMenuBtn">
+            <svg class="header-menu-btn__icon header-menu-btn__icon--close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <svg class="header-menu-btn__icon header-menu-btn__icon--open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <span class="header-menu-btn__text">Все разделы</span>
+        </button>
+
+        <a href="index.html" class="header__logo">
+            <span class="header__logo-text">Grill</span>
+            <span class="header__logo-sub">Премиум</span>
+        </a>
+
+        <nav class="nav" id="nav">
+            <ul class="nav__list">
+                <li><a href="index.html" class="nav__link">Главная</a></li>
+                <li><a href="products.html" class="nav__link">Каталог</a></li>
+                <li><a href="configurator.html" class="nav__link">Конфигуратор</a></li>
+                <li><a href="calendar.html" class="nav__link">Календарь</a></li>
+                <li><a href="reviews.html" class="nav__link nav__link--active">Отзывы</a></li>
+            </ul>
+        </nav>
+        <div class="header__contacts">
+            <a href="tel:+375257486784" class="header__phone">+375 25 748 67 84</a>
+            <a href="auth.html" class="header__auth-link">Войти</a>
+            <button class="burger" id="burger"><span></span><span></span><span></span></button>
+        </div>
+    </div>
+</header>
+
+<div class="reviews-page">
+    <!-- HERO С ФОНОМ -->
+    <div class="reviews-hero">
+        <div class="reviews-hero__bg">
+            <img src="images/bg_main.jpg" alt="Отзывы">
+            <div class="reviews-hero__overlay"></div>
+        </div>
+        <div class="reviews-hero__content">
+            <span class="reviews-hero__badge">⭐ Отзывы клиентов</span>
+            <h1 class="reviews-hero__title">Что говорят наши клиенты</h1>
+            <p class="reviews-hero__subtitle">Реальные отзывы от людей, которые уже оценили качество наших гриль-кухонь</p>
+            <div class="reviews-hero__stats" id="reviewsStats"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- ФОРМА ОТЗЫВА -->
+        <div class="review-form-card">
+            <h2 class="review-form-card__title">✍️ Оставьте свой отзыв</h2>
+            <form class="review-form" id="reviewForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Ваше имя *</label>
+                        <input type="text" class="form-input" name="name" placeholder="Иван Иванов" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Оценка *</label>
+                        <div class="rating-select">
+                            <input type="radio" name="rating" id="star5" value="5" checked>
+                            <label for="star5">★</label>
+                            <input type="radio" name="rating" id="star4" value="4">
+                            <label for="star4">★</label>
+                            <input type="radio" name="rating" id="star3" value="3">
+                            <label for="star3">★</label>
+                            <input type="radio" name="rating" id="star2" value="2">
+                            <label for="star2">★</label>
+                            <input type="radio" name="rating" id="star1" value="1">
+                            <label for="star1">★</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Ваш отзыв *</label>
+                    <textarea class="form-input" name="text" rows="4" placeholder="Расскажите о вашем опыте..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full">Отправить отзыв</button>
+            </form>
+        </div>
+
+        <!-- СПИСОК ОТЗЫВОВ -->
+        <div class="reviews-list" id="reviewsList"></div>
+    </div>
+</div>
+
+<!-- ФУТЕР -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__grid">
+            <div class="footer__col footer__col--nav">
+                <h4 class="footer__title">Навигация</h4>
+                <nav class="footer__nav">
+                    <a href="index.html" class="footer__link">Главная</a>
+                    <a href="products.html" class="footer__link">Каталог</a>
+                    <a href="configurator.html" class="footer__link">Конфигуратор</a>
+                    <a href="reviews.html" class="footer__link">Отзывы</a>
+                </nav>
+            </div>
+            <div class="footer__col footer__col--contact">
+                <a href="tel:+375257486784" class="footer__phone">+375 25 748 67 84</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="settings.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const API_URL = 'http://localhost:3000';
+    const reviewsList = document.getElementById('reviewsList');
+    const reviewsStats = document.getElementById('reviewsStats');
+    const reviewForm = document.getElementById('reviewForm');
+
+    function isAdmin() {
+        try {
+            const s = JSON.parse(localStorage.getItem('auth_session'));
+            return s && s.user && s.user.email === 'admin@grill.com';
+        } catch { return false; }
+    }
+
+    async function loadReviews() {
+        try {
+            const res = await fetch(`${API_URL}/reviews`);
+            const reviews = await res.json();
+            renderReviews(reviews);
+            renderStats(reviews);
+        } catch (err) {
+            reviewsList.innerHTML = '<p class="reviews-empty">Ошибка загрузки отзывов</p>';
+        }
+    }
+
+    function renderStats(reviews) {
+        if (reviews.length === 0) {
+            reviewsStats.innerHTML = '';
+            return;
+        }
+        const avg = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+        const fiveStars = reviews.filter(r => r.rating === 5).length;
+        reviewsStats.innerHTML = `
+            <div class="reviews-hero__stat">
+                <div class="reviews-hero__stat-num">${reviews.length}</div>
+                <div class="reviews-hero__stat-text">Всего отзывов</div>
+            </div>
+            <div class="reviews-hero__stat">
+                <div class="reviews-hero__stat-num">${avg.toFixed(1)}</div>
+                <div class="reviews-hero__stat-text">Средняя оценка</div>
+            </div>
+            <div class="reviews-hero__stat">
+                <div class="reviews-hero__stat-num">${fiveStars}</div>
+                <div class="reviews-hero__stat-text">Пятёрок</div>
+            </div>
+        `;
+    }
+
+    function renderReviews(reviews) {
+        if (reviews.length === 0) {
+            reviewsList.innerHTML = '<p class="reviews-empty">Пока нет отзывов. Будьте первым!</p>';
+            return;
+        }
+
+        const admin = isAdmin();
+        const sorted = [...reviews].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        reviewsList.innerHTML = sorted.map(r => {
+            const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+            const initial = (r.name || '?')[0].toUpperCase();
+            const date = new Date(r.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+            
+            return `
+                <div class="review-card" data-id="${r.id}">
+                    ${admin ? `
+                    <button class="review-card__delete" data-id="${r.id}" title="Удалить отзыв">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>` : ''}
+                    <div class="review-card__header">
+                        <div class="review-card__author">
+                            <div class="review-card__avatar">${initial}</div>
+                            <div>
+                                <div class="review-card__name">${r.name}</div>
+                                <div class="review-card__date">${date}</div>
+                            </div>
+                        </div>
+                        <div class="review-card__rating">${stars}</div>
+                    </div>
+                    <p class="review-card__text">${r.text}</p>
+                    ${r.verified ? '<span class="review-card__verified">✓ Проверенный покупатель</span>' : ''}
+                </div>
+            `;
+        }).join('');
+
+        if (admin) {
+            document.querySelectorAll('.review-card__delete').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const id = btn.dataset.id;
+                    const card = btn.closest('.review-card');
+                    const name = card.querySelector('.review-card__name').textContent;
+                    if (confirm(`Удалить отзыв от "${name}"?`)) {
+                        await fetch(`${API_URL}/reviews/${id}`, { method: 'DELETE' });
+                        await loadReviews();
+                    }
+                });
+            });
+        }
+    }
+
+    reviewForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalText = btn.textContent;
+        
+        btn.textContent = 'Отправка...';
+        btn.disabled = true;
+
+        const newReview = {
+            name: formData.get('name'),
+            rating: parseInt(formData.get('rating')),
+            text: formData.get('text'),
+            date: new Date().toISOString().split('T')[0],
+            verified: false
+        };
+
+        try {
+            await fetch(`${API_URL}/reviews`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newReview)
+            });
+
+            btn.textContent = '✓ Отзыв отправлен!';
+            btn.style.background = '#27ae60';
+            reviewForm.reset();
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+                btn.disabled = false;
+                loadReviews();
+            }, 2000);
+        } catch (err) {
+            btn.textContent = 'Ошибка';
+            btn.disabled = false;
+        }
+    });
+
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
+    if (burger && nav) burger.addEventListener('click', () => { nav.classList.toggle('active'); burger.classList.toggle('active'); });
+
+    loadReviews();
+});
+</script>
+</body>
+</html>

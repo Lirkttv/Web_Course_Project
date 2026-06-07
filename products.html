@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог | Гриль-кухни премиум-класса</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="indexcss.css">
+    <link rel="stylesheet" href="products.css">
+</head>
+<body>
+
+<!-- ШАПКА -->
+<header class="header header--static">
+    <div class="container header__inner">
+        <button class="header-menu-btn" id="headerMenuBtn">
+            <svg class="header-menu-btn__icon header-menu-btn__icon--close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <svg class="header-menu-btn__icon header-menu-btn__icon--open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <span class="header-menu-btn__text">Все разделы</span>
+        </button>
+
+        <a href="index.html" class="header__logo">
+            <span class="header__logo-text">Grill</span>
+            <span class="header__logo-sub">Премиум</span>
+        </a>
+
+        <nav class="nav" id="nav">
+            <ul class="nav__list">
+                <li><a href="index.html#works" class="nav__link">Состав работ</a></li>
+                <li><a href="index.html#calc" class="nav__link">Рассчитать</a></li>
+                <li><a href="products.html" class="nav__link nav__link--active">Каталог</a></li>
+                <li><a href="index.html#portfolio" class="nav__link">Наши работы</a></li>
+                <li><a href="index.html#reviews" class="nav__link">Отзывы</a></li>
+                <li><a href="index.html#faq" class="nav__link">Вопросы</a></li>
+            </ul>
+        </nav>
+        <div class="header__contacts">
+            <a href="tel:+375257486784" class="header__phone">+375 25 748 67 84</a>
+            <a href="auth.html" class="header__auth-link">Войти</a>
+            
+            <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
+                <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+
+            <a href="#callback" class="btn btn--primary">Заказать звонок</a>
+        </div>
+        <button class="burger" id="burger" aria-label="Открыть меню">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+
+    <div class="header-dropdown" id="headerDropdown">
+        <div class="container">
+            <nav class="header-dropdown__nav">
+                <a href="index.html#works" class="header-dropdown__link">Состав работ</a>
+                <a href="index.html#calc" class="header-dropdown__link">Рассчитать</a>
+                <a href="products.html" class="header-dropdown__link">Каталог</a>
+                <a href="index.html#portfolio" class="header-dropdown__link">Наши работы</a>
+                <a href="index.html#video" class="header-dropdown__link">Видеообзор</a>
+                <a href="index.html#reviews" class="header-dropdown__link">Отзывы</a>
+                <a href="index.html#faq" class="header-dropdown__link">Ответы на вопросы</a>
+                <a href="index.html#stores" class="header-dropdown__link">Наши магазины</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- HERO КАТАЛОГА -->
+<section class="catalog-hero">
+    <div class="catalog-hero__bg">
+        <img src="images/bg_main.jpg" alt="Каталог" class="catalog-hero__img">
+        <div class="catalog-hero__overlay"></div>
+    </div>
+    <div class="container">
+        <div class="catalog-hero__content">
+            <span class="catalog-hero__badge">Премиум качество</span>
+            <h1 class="catalog-hero__title">Каталог гриль-кухонь</h1>
+            <p class="catalog-hero__subtitle">Выберите идеальную гриль-кухню из нашей коллекции. Все модели изготавливаются по индивидуальным размерам с учётом ваших пожеланий.</p>
+            <div class="catalog-hero__stats">
+                <div class="catalog-hero__stat">
+                    <span class="catalog-hero__stat-num">50+</span>
+                    <span class="catalog-hero__stat-text">моделей</span>
+                </div>
+                <div class="catalog-hero__stat">
+                    <span class="catalog-hero__stat-num">100%</span>
+                    <span class="catalog-hero__stat-text">индивидуально</span>
+                </div>
+                <div class="catalog-hero__stat">
+                    <span class="catalog-hero__stat-num">5 лет</span>
+                    <span class="catalog-hero__stat-text">гарантии</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ПОИСК И ФИЛЬТРЫ -->
+<section class="catalog-filters">
+    <div class="container">
+        <div class="catalog-search" style="margin-bottom: 20px;">
+            <div class="catalog-search__wrapper">
+                <svg class="catalog-search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="catalog-search__input" id="searchInput" placeholder="Поиск по названию...">
+                <button class="catalog-search__clear" id="searchClear" style="display: none;">✕</button>
+            </div>
+        </div>
+
+        <div class="catalog-filters__wrapper">
+            <button class="catalog-filter-btn active" data-filter="all">Все модели</button>
+            <button class="catalog-filter-btn" data-filter="steel">Нержавеющая сталь</button>
+            <button class="catalog-filter-btn" data-filter="composite">Композит HPL</button>
+            <button class="catalog-filter-btn" data-filter="straight">Прямые</button>
+            <button class="catalog-filter-btn" data-filter="corner">Угловые</button>
+            <button class="catalog-filter-btn" data-filter="island">С островком</button>
+            <button class="catalog-filter-btn" data-filter="p-shape">П-образные</button>
+        </div>
+
+        <div class="catalog-filters__info">
+            <span class="catalog-filters__count">Найдено: <strong id="productsCount">6</strong> моделей</span>
+            <div class="catalog-filters__sort">
+                <label for="sortSelect">Сортировка:</label>
+                <select id="sortSelect" class="catalog-filters__select">
+                    <option value="default">По умолчанию</option>
+                    <option value="price-asc">Цена: по возрастанию</option>
+                    <option value="price-desc">Цена: по убыванию</option>
+                    <option value="name-asc">Название: А-Я</option>
+                    <option value="name-desc">Название: Я-А</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- АДМИН-ПАНЕЛЬ -->
+<div class="admin-catalog-panel" id="adminCatalogPanel" style="display: none;">
+    <div class="admin-catalog-panel__header">
+        <h3 class="admin-catalog-panel__title">🛠 Панель администратора</h3>
+        <button class="admin-catalog-panel__add-btn" id="adminAddProductBtn">+ Добавить товар</button>
+    </div>
+</div>
+
+<!-- СЕТКА ТОВАРОВ -->
+<section class="catalog-grid">
+    <div class="container">
+        <div class="catalog-grid__wrapper" id="productsGrid"></div>
+
+        <div class="catalog-empty" id="catalogEmpty" style="display: none;">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <h3>По вашему запросу ничего не найдено</h3>
+            <p>Попробуйте изменить параметры фильтра</p>
+            <button class="btn btn--primary" id="resetFilters">Сбросить фильтры</button>
+        </div>
+    </div>
+</section>
+
+<!-- CTA СЕКЦИЯ -->
+<section class="catalog-cta">
+    <div class="container">
+        <div class="catalog-cta__card">
+            <div class="catalog-cta__content">
+                <h2 class="catalog-cta__title">Не нашли подходящую модель?</h2>
+                <p class="catalog-cta__text">Мы изготовим гриль-кухню по вашему индивидуальному проекту. Оставьте заявку, и наш дизайнер свяжется с вами для обсуждения деталей.</p>
+                <div class="catalog-cta__buttons">
+                    <button class="btn btn--primary btn--large" data-modal="calculationModal">Заказать индивидуальный проект</button>
+                    <a href="tel:+375257486784" class="btn btn--outline btn--large">Позвонить</a>
+                </div>
+            </div>
+            <div class="catalog-cta__image">
+                <img src="images/246.jpg" alt="Индивидуальный проект">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__grid">
+            <div class="footer__col footer__col--nav">
+                <h4 class="footer__title">Навигация по сайту</h4>
+                <nav class="footer__nav">
+                    <a href="index.html#advantages" class="footer__link">Преимущества</a>
+                    <a href="index.html#works" class="footer__link">Состав работ</a>
+                    <a href="index.html#calc" class="footer__link">Предварительный расчет</a>
+                    <a href="products.html" class="footer__link">Каталог</a>
+                    <a href="index.html#portfolio" class="footer__link">Наши работы</a>
+                    <a href="index.html#faq" class="footer__link">Ответы на вопросы</a>
+                </nav>
+            </div>
+
+            <div class="footer__col footer__col--stores">
+                <h4 class="footer__title">Магазины</h4>
+                <div class="footer__stores">
+                    <div class="footer__store">
+                        <svg class="footer__store-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <p class="footer__store-text">Москва, Калужское шоссе, поселение Сосенское, ул. Сосновская 3Б</p>
+                    </div>
+                    <div class="footer__store">
+                        <svg class="footer__store-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <p class="footer__store-text">Москва, Калужское шоссе, поселение Десеновское, деревня Десна, ул. Рябиновая 15</p>
+                    </div>
+                    <div class="footer__store">
+                        <svg class="footer__store-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <p class="footer__store-text">Санкт-Петербург, Межевой канал 5 АХ</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__col footer__col--contact">
+                <a href="tel:+375257486784" class="footer__phone">+375 25 748 67 84</a>
+                <a href="#callback" class="btn btn--primary btn--footer">Заказать звонок</a>
+                
+                <div class="footer__socials">
+                    <a href="#" class="footer__social">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.944 0A12 12 0 1 0 24 12.056A12.01 12.01 0 0 0 11.944 0Zm5.65 8.12-1.72 8.12c-.13.58-.47.72-.95.45l-2.64-1.95-1.27 1.22c-.14.14-.26.26-.53.26l.19-2.67 4.86-4.39c.21-.19-.05-.29-.33-.11l-6 3.79-2.58-.81c-.56-.18-.57-.56.12-.83l10.08-3.89c.47-.17.88.11.73.83Z"/>
+                        </svg>
+                        Telegram
+                    </a>
+                    <a href="#" class="footer__social">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                        </svg>
+                        Whatsapp
+                    </a>
+                </div>
+
+                <div class="footer__legal">
+                    <a href="#" class="footer__legal-link">Политика конфиденциальности</a>
+                    <a href="#" class="footer__legal-link">Пользовательское соглашение</a>
+                    <a href="#" class="footer__legal-link">Публичная оферта</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- МОДАЛКА ТОВАРА -->
+<div class="modal modal--product" id="productModal">
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__content modal__content--product">
+        <button class="modal__close" data-close-modal aria-label="Закрыть">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <div class="product-modal__body">
+            <div class="product-modal__image">
+                <img src="images/кухня1.png" alt="" id="productModalImg">
+            </div>
+            <div class="product-modal__info">
+                <span class="product-modal__badge" id="productModalBadge">Хит продаж</span>
+                <h2 class="product-modal__title" id="productModalTitle">Название товара</h2>
+                <p class="product-modal__desc" id="productModalDesc">Описание товара</p>
+                
+                <div class="product-modal__specs">
+                    <h4>Характеристики:</h4>
+                    <ul id="productModalSpecs">
+                        <li><span>Материал:</span> <strong>—</strong></li>
+                        <li><span>Конфигурация:</span> <strong>—</strong></li>
+                        <li><span>Длина:</span> <strong>—</strong></li>
+                        <li><span>Размещение:</span> <strong>—</strong></li>
+                    </ul>
+                </div>
+
+                <div class="product-modal__price">
+                    <span class="product-modal__price-label">Стоимость:</span>
+                    <span class="product-modal__price-value" id="productModalPrice">0 BYN</span>
+                </div>
+
+                <div class="product-modal__actions">
+                    <button class="btn btn--primary btn--full" data-modal="calculationModal">Заказать расчёт</button>
+                    <a href="tel:+375257486784" class="btn btn--outline btn--full">Позвонить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- МОДАЛКА: Заказать звонок -->
+<div class="modal" id="callbackModal">
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__content">
+        <button class="modal__close" data-close-modal aria-label="Закрыть">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <h3 class="modal__title">Заказать звонок</h3>
+        <p class="modal__subtitle">Оставьте ваш номер телефона, и мы перезвоним вам в течение 15 минут</p>
+        
+        <form class="modal__form" id="callbackForm">
+            <div class="form-group">
+                <input type="text" class="form-input" placeholder="Ваше имя" required>
+            </div>
+            <div class="form-group">
+                <div class="phone-input">
+                    <span class="phone-code">+375</span>
+                    <input type="tel" class="form-input" placeholder="(25) 748-67-84" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full">Перезвоните мне</button>
+            <p class="modal__privacy">Нажимая кнопку, вы даете согласие на обработку персональных данных</p>
+        </form>
+    </div>
+</div>
+
+<!-- МОДАЛКА: Получить расчёт -->
+<div class="modal" id="calculationModal">
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__content modal__content--large">
+        <button class="modal__close" data-close-modal aria-label="Закрыть">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <h3 class="modal__title">Индивидуальный проект</h3>
+        <p class="modal__subtitle">Заполните форму, и наш дизайнер свяжется с вами для обсуждения деталей</p>
+        
+        <form class="modal__form" id="calculationForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" class="form-input" placeholder="Телефон" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-input" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <textarea class="form-input" placeholder="Опишите ваши пожелания к проекту" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full">Отправить заявку</button>
+            <p class="modal__privacy">Нажимая кнопку, вы даете согласие на обработку персональных данных</p>
+        </form>
+    </div>
+</div>
+
+<script src="settings.js" defer></script>
+<script src="products.js" defer></script>
+</body>
+</html>

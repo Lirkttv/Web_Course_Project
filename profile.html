@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | Grill</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="indexcss.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+
+<!-- ШАПКА -->
+<header class="header header--static">
+    <div class="container header__inner">
+        <a href="index.html" class="header__logo">
+            <span class="header__logo-text">Grill</span>
+            <span class="header__logo-sub">Премиум</span>
+        </a>
+        <nav class="nav" id="nav">
+            <ul class="nav__list">
+                <li><a href="index.html" class="nav__link">Главная</a></li>
+                <li><a href="products.html" class="nav__link">Каталог</a></li>
+                <li><a href="configurator.html" class="nav__link">Конфигуратор</a></li>
+                <li><a href="calendar.html" class="nav__link">Календарь</a></li>
+                <li><a href="reviews.html" class="nav__link">Отзывы</a></li>
+            </ul>
+        </nav>
+        <div class="header__contacts">
+            <a href="tel:+375257486784" class="header__phone">+375 25 748 67 84</a>
+            <a href="auth.html" class="header__auth-link">Войти</a>
+        </div>
+        <button class="burger" id="burger"><span></span><span></span><span></span></button>
+    </div>
+</header>
+
+<div class="profile-page" id="profilePage">
+    <div class="container">
+        <div class="profile-card" id="profileCard">
+            <div class="profile-avatar" id="profileAvatar">?</div>
+            <h1 class="profile-name" id="profileName">
+                Загрузка...
+                <span class="admin-badge" id="adminBadge" style="display: none;">ADMIN</span>
+            </h1>
+            <p class="profile-email" id="profileEmail">...</p>
+
+            <form class="profile-form" id="profileForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Фамилия</label>
+                        <input type="text" class="form-input" name="lastname" id="profileLastname">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Имя</label>
+                        <input type="text" class="form-input" name="firstname" id="profileFirstname">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Отчество</label>
+                    <input type="text" class="form-input" name="patronymic" id="profilePatronymic">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Дата рождения</label>
+                    <input type="date" class="form-input" name="dob" id="profileDob">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Телефон</label>
+                    <input type="tel" class="form-input" name="phone" id="profilePhone">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" name="email" id="profileEmailInput">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Никнейм</label>
+                    <input type="text" class="form-input" name="nickname" id="profileNickname">
+                </div>
+                <div class="profile-actions">
+                    <button type="submit" class="btn btn--primary">Сохранить изменения</button>
+                    <a href="auth.html" class="btn btn--outline" style="text-align:center;">Выйти</a>
+                </div>
+            </form>
+
+            <div class="profile-orders" id="profileOrders" style="display:none;">
+                <h3>Мои заказы</h3>
+                <div id="ordersList"></div>
+            </div>
+
+            <!-- АДМИН-ПАНЕЛЬ УПРАВЛЕНИЯ ТОВАРАМИ -->
+            <div class="admin-panel" id="adminPanel" style="display: none;">
+                <div class="admin-panel__header">
+                    <h3 class="admin-panel__title">🛠 Управление товарами</h3>
+                    <button class="admin-panel__add-btn" id="addProductBtn">+ Добавить товар</button>
+                </div>
+                <div class="admin-products-list" id="adminProductsList"></div>
+            </div>
+
+            <button class="admin-logout-btn" id="adminLogoutBtn" style="display: none;">Выйти из режима администратора</button>
+        </div>
+    </div>
+</div>
+
+<script src="settings.js" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const API_URL = 'http://localhost:3000';
+    
+    const sessionData = localStorage.getItem('auth_session');
+    if (!sessionData) {
+        window.location.href = 'auth.html';
+        return;
+    }
+    
+    const session = JSON.parse(sessionData);
+    const user = session.user;
+    const isAdmin = user.email === 'admin@grill.com';
+    
+    if (isAdmin) {
+        document.getElementById('profilePage').classList.add('admin-mode');
+        document.getElementById('adminBadge').style.display = 'inline-block';
+        document.getElementById('adminLogoutBtn').style.display = 'block';
+        document.getElementById('adminPanel').style.display = 'block';
+    }
+    
+    document.getElementById('profileAvatar').textContent = (user.firstname || user.nickname || '?')[0].toUpperCase();
+    document.getElementById('profileName').innerHTML = `${user.firstname || ''} ${user.lastname || ''}`.trim() || user.nickname || 'Пользователь';
+    document.getElementById('profileEmail').textContent = user.email || '';
+    document.getElementById('profileLastname').value = user.lastname || '';
+    document.getElementById('profileFirstname').value = user.firstname || '';
+    document.getElementById('profilePatronymic').value = user.patronymic || '';
+    document.getElementById('profileDob').value = user.dob || '';
+    document.getElementById('profilePhone').value = user.phone || '';
+    document.getElementById('profileEmailInput').value = user.email || '';
+    document.getElementById('profileNickname').value = user.nickname || '';
+    
+    document.getElementById('profileForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalText = btn.textContent;
+        btn.textContent = 'Сохранение...';
+        btn.disabled = true;
+        
+        try {
+            const res = await fetch(`${API_URL}/users?email=${encodeURIComponent(user.email)}`);
+            const users = await res.json();
+            
+            if (users.length > 0) {
+                const userId = users[0].id;
+                const updatedData = {
+                    lastname: document.getElementById('profileLastname').value,
+                    firstname: document.getElementById('profileFirstname').value,
+                    patronymic: document.getElementById('profilePatronymic').value,
+                    dob: document.getElementById('profileDob').value,
+                    phone: document.getElementById('profilePhone').value,
+                    email: document.getElementById('profileEmailInput').value,
+                    nickname: document.getElementById('profileNickname').value
+                };
+                
+                await fetch(`${API_URL}/users/${userId}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedData)
+                });
+                
+                const newSession = { ...session, user: { ...user, ...updatedData } };
+                localStorage.setItem('auth_session', JSON.stringify(newSession));
+                
+                btn.textContent = '✓ Сохранено!';
+                btn.style.background = '#27ae60';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                    location.reload();
+                }, 1500);
+            }
+        } catch (err) {
+            btn.textContent = 'Ошибка';
+            btn.disabled = false;
+        }
+    });
+    
+    document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+        if (confirm('Выйти из режима администратора?')) {
+            localStorage.removeItem('auth_session');
+            window.location.href = 'auth.html';
+        }
+    });
+    
+    try {
+        const res = await fetch(`${API_URL}/requests`);
+        const requests = await res.json();
+        const ordersList = document.getElementById('ordersList');
+        const profileOrders = document.getElementById('profileOrders');
+        
+        if (requests.length > 0) {
+            profileOrders.style.display = 'block';
+            ordersList.innerHTML = requests.map(req => `
+                <div class="profile-order">
+                    <div class="profile-order__header">
+                        <span class="profile-order__date">${new Date(req.created_at).toLocaleDateString('ru-RU')}</span>
+                        <span class="profile-order__status profile-order__status--new">${req.type === 'checkout' ? 'Заказ' : 'Заявка'}</span>
+                    </div>
+                    <div class="profile-order__total">${(req.totalPrice || 0).toLocaleString('ru-RU')} BYN</div>
+                </div>
+            `).join('');
+        }
+    } catch (e) {}
+    
+    if (isAdmin) {
+        await loadAdminProducts();
+        document.getElementById('addProductBtn').addEventListener('click', () => {
+            openProductModal(null);
+        });
+    }
+    
+    async function loadAdminProducts() {
+        try {
+            const res = await fetch(`${API_URL}/products`);
+            const products = await res.json();
+            renderAdminProducts(products);
+        } catch (err) {
+            document.getElementById('adminProductsList').innerHTML = '<p style="color:#e74c3c;">Ошибка загрузки товаров</p>';
+        }
+    }
+    
+    function renderAdminProducts(products) {
+        const list = document.getElementById('adminProductsList');
+        if (products.length === 0) {
+            list.innerHTML = '<p style="text-align:center;color:#999;padding:20px;">Товаров пока нет</p>';
+            return;
+        }
+        
+        list.innerHTML = products.map(p => `
+            <div class="admin-product-item">
+                <div class="admin-product-item__img">
+                    <img src="${p.img || 'images/кухня1.png'}" alt="${p.title}">
+                </div>
+                <div class="admin-product-item__info">
+                    <div class="admin-product-item__title">${p.title}</div>
+                    <div class="admin-product-item__price">${p.priceFormatted || p.price.toLocaleString('ru-RU') + ' BYN'}</div>
+                </div>
+                <div class="admin-product-item__actions">
+                    <button class="admin-product-item__btn admin-product-item__btn--edit" data-id="${p.id}" title="Редактировать">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                    </button>
+                    <button class="admin-product-item__btn admin-product-item__btn--delete" data-id="${p.id}" title="Удалить">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"/>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        `).join('');
+        
+        list.querySelectorAll('.admin-product-item__btn--edit').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const id = btn.dataset.id;
+                const res = await fetch(`${API_URL}/products/${id}`);
+                const product = await res.json();
+                openProductModal(product);
+            });
+        });
+        
+        list.querySelectorAll('.admin-product-item__btn--delete').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const id = btn.dataset.id;
+                const title = btn.closest('.admin-product-item').querySelector('.admin-product-item__title').textContent;
+                if (confirm(`Удалить товар "${title}"?`)) {
+                    await fetch(`${API_URL}/products/${id}`, { method: 'DELETE' });
+                    await loadAdminProducts();
+                }
+            });
+        });
+    }
+    
+    function openProductModal(product) {
+        const isEdit = !!product;
+        const modal = document.createElement('div');
+        modal.className = 'admin-modal';
+        modal.innerHTML = `
+            <div class="admin-modal__content">
+                <h3 class="admin-modal__title">${isEdit ? 'Редактировать товар' : 'Добавить товар'}</h3>
+                <form class="admin-modal__form" id="productForm">
+                    <div>
+                        <label>Название *</label>
+                        <input type="text" name="title" value="${product?.title || ''}" required>
+                    </div>
+                    <div>
+                        <label>Описание</label>
+                        <textarea name="desc">${product?.desc || ''}</textarea>
+                    </div>
+                    <div class="admin-modal-row">
+                        <div>
+                            <label>Цена (BYN) *</label>
+                            <input type="number" name="price" value="${product?.price || ''}" required>
+                        </div>
+                        <div>
+                            <label>Бейдж</label>
+                            <input type="text" name="badge" value="${product?.badge || ''}" placeholder="Хит, Новинка...">
+                        </div>
+                    </div>
+                    <div>
+                        <label>Путь к картинке</label>
+                        <input type="text" name="img" value="${product?.img || 'images/кухня1.png'}" placeholder="images/кухня1.png">
+                    </div>
+                    <div class="admin-modal-row">
+                        <div>
+                            <label>Материал</label>
+                            <select name="material">
+                                <option value="Нержавеющая сталь" ${product?.specs?.Материал === 'Нержавеющая сталь' ? 'selected' : ''}>Нержавеющая сталь</option>
+                                <option value="Композит HPL" ${product?.specs?.Материал === 'Композит HPL' ? 'selected' : ''}>Композит HPL</option>
+                                <option value="Композит + дерево" ${product?.specs?.Материал === 'Композит + дерево' ? 'selected' : ''}>Композит + дерево</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Конфигурация</label>
+                            <select name="config">
+                                <option value="Прямая" ${product?.specs?.Конфигурация === 'Прямая' ? 'selected' : ''}>Прямая</option>
+                                <option value="Угловая" ${product?.specs?.Конфигурация === 'Угловая' ? 'selected' : ''}>Угловая</option>
+                                <option value="П-образная" ${product?.specs?.Конфигурация === 'П-образная' ? 'selected' : ''}>П-образная</option>
+                                <option value="С островком" ${product?.specs?.Конфигурация === 'С островком' ? 'selected' : ''}>С островком</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="admin-modal-row">
+                        <div>
+                            <label>Длина</label>
+                            <input type="text" name="length" value="${product?.specs?.Длина || '2.2 п.м'}">
+                        </div>
+                        <div>
+                            <label>Размещение</label>
+                            <input type="text" name="placement" value="${product?.specs?.Размещение || 'Открытая терраса'}">
+                        </div>
+                    </div>
+                    <div class="admin-modal__actions">
+                        <button type="button" class="admin-modal__btn-cancel" id="modalCancel">Отмена</button>
+                        <button type="submit" class="admin-modal__btn-save">${isEdit ? 'Сохранить' : 'Добавить'}</button>
+                    </div>
+                </form>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        document.getElementById('modalCancel').addEventListener('click', () => document.body.removeChild(modal));
+        modal.addEventListener('click', (e) => { if (e.target === modal) document.body.removeChild(modal); });
+        
+        document.getElementById('productForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const price = parseInt(formData.get('price'));
+            
+            const productData = {
+                title: formData.get('title'),
+                desc: formData.get('desc'),
+                price: price,
+                priceFormatted: price.toLocaleString('ru-RU') + ' BYN',
+                badge: formData.get('badge') || '',
+                badgeClass: formData.get('badge') === 'Новинка' ? 'product-card__badge--new' : 
+                            formData.get('badge') === 'Премиум' || formData.get('badge') === 'Люкс' || formData.get('badge') === 'Эксклюзив' ? 'product-card__badge--premium' : '',
+                img: formData.get('img'),
+                specs: {
+                    Материал: formData.get('material'),
+                    Конфигурация: formData.get('config'),
+                    Длина: formData.get('length'),
+                    Размещение: formData.get('placement')
+                },
+                categories: [
+                    formData.get('material') === 'Нержавеющая сталь' ? 'steel' : 'composite',
+                    formData.get('config') === 'Прямая' ? 'straight' :
+                    formData.get('config') === 'Угловая' ? 'corner' :
+                    formData.get('config') === 'П-образная' ? 'p-shape' : 'island'
+                ]
+            };
+            
+            try {
+                if (isEdit) {
+                    await fetch(`${API_URL}/products/${product.id}`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(productData)
+                    });
+                } else {
+                    await fetch(`${API_URL}/products`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(productData)
+                    });
+                }
+                
+                document.body.removeChild(modal);
+                await loadAdminProducts();
+            } catch (err) {
+                alert('Ошибка: ' + err.message);
+            }
+        });
+    }
+    
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('nav');
+    if (burger && nav) burger.addEventListener('click', () => { nav.classList.toggle('active'); burger.classList.toggle('active'); });
+});
+</script>
+</body>
+</html>
