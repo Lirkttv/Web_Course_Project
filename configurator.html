@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Конфигуратор гриль-кухни | Grill</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="indexcss.css">
+        <link rel="stylesheet" href="configurator.css">
+        
+        <!-- КРИТИЧНЫЕ СТИЛИ ШАПКИ (встроенные) -->
+        <style>
+            /* Шапка конфигуратора — всегда видна и занимает место */
+            body > .header.header--static,
+            .header.header--static {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                z-index: 1000 !important;
+                background: var(--header-bg) !important;
+                backdrop-filter: blur(10px) !important;
+                box-shadow: 0 2px 20px var(--shadow-color) !important;
+                padding: 1.2rem 0 !important;
+            }
+    
+            /* Логотип */
+            .header__logo {
+                display: flex;
+                flex-direction: column;
+                text-decoration: none;
+                line-height: 1;
+                margin-right: auto;
+            }
+            .header__logo-text {
+                font-size: 1.5rem;
+                font-weight: 800;
+                color: var(--color-primary);
+                letter-spacing: -0.5px;
+            }
+            .header__logo-sub {
+                font-size: 0.7rem;
+                font-weight: 500;
+                color: var(--text-secondary);
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+    
+            /* Активная ссылка */
+            .nav__link--active {
+                color: var(--color-primary) !important;
+            }
+            .nav__link--active::after {
+                width: 100% !important;
+            }
+    
+            /* Hero не должен налезать на шапку */
+            .configurator-hero {
+                margin-top: 0 !important;
+                padding-top: 100px !important;
+            }
+    
+            /* Прогресс-бар прилипает под шапкой при скролле */
+            .configurator-progress {
+                position: sticky !important;
+                top: 0 !important;
+                z-index: 50 !important;
+                background: var(--bg-primary) !important;
+                backdrop-filter: blur(10px) !important;
+                border-bottom: 1px solid var(--border-color);
+            }
+    
+            /* Шапка прилипает сверху при скролле */
+            .header.header--static {
+                position: sticky !important;
+                top: 0 !important;
+            }
+    
+            /* Адаптивность шапки */
+            @media (max-width: 768px) {
+                .header.header--static {
+                    padding: 1rem 0 !important;
+                }
+                .header__logo-text {
+                    font-size: 1.2rem;
+                }
+                .header__logo-sub {
+                    font-size: 0.6rem;
+                }
+            }
+        </style>
+    </head>
+<body>
+
+<!-- ПРЕЛОАДЕР -->
+<div class="preloader" id="preloader">
+    <div class="preloader__spinner">
+        <div class="preloader__flame">🔥</div>
+    </div>
+    <p class="preloader__text">Загрузка...</p>
+</div>
+
+<!-- ШАПКА -->
+<header class="header header--static">
+    <div class="container header__inner">
+        <!-- Кнопка меню слева -->
+        <button class="header-menu-btn" id="headerMenuBtn">
+            <svg class="header-menu-btn__icon header-menu-btn__icon--close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+            <svg class="header-menu-btn__icon header-menu-btn__icon--open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <span class="header-menu-btn__text">Все разделы</span>
+        </button>
+
+        <!-- Логотип -->
+        <a href="index.html" class="header__logo">
+            <span class="header__logo-text">Grill</span>
+            <span class="header__logo-sub">Премиум</span>
+        </a>
+
+        <!-- Навигация -->
+        <nav class="nav" id="nav">
+            <ul class="nav__list">
+                <li><a href="index.html" class="nav__link">Главная</a></li>
+                <li><a href="products.html" class="nav__link">Каталог</a></li>
+                <li><a href="configurator.html" class="nav__link nav__link--active">Конфигуратор</a></li>
+                <li><a href="index.html#portfolio" class="nav__link">Наши работы</a></li>
+                <li><a href="index.html#reviews" class="nav__link">Отзывы</a></li>
+            </ul>
+        </nav>
+
+        <!-- Контакты справа -->
+        <div class="header__contacts">
+            <a href="tel:+375257486784" class="header__phone">+375 25 748 67 84</a>
+            <a href="auth.html" class="header__auth-link">Войти</a>
+            
+            <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
+                <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+
+            <a href="#callback" class="btn btn--primary">Заказать звонок</a>
+        </div>
+
+        <!-- Бургер для мобильных -->
+        <button class="burger" id="burger" aria-label="Открыть меню">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+
+    <!-- Выпадающее меню -->
+    <div class="header-dropdown" id="headerDropdown">
+        <div class="container">
+            <nav class="header-dropdown__nav">
+                <a href="index.html" class="header-dropdown__link">Главная</a>
+                <a href="products.html" class="header-dropdown__link">Каталог</a>
+                <a href="configurator.html" class="header-dropdown__link">Конфигуратор</a>
+                <a href="index.html#portfolio" class="header-dropdown__link">Наши работы</a>
+                <a href="index.html#reviews" class="header-dropdown__link">Отзывы</a>
+                <a href="index.html#faq" class="header-dropdown__link">Ответы на вопросы</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- HERO КОНФИГУРАТОРА -->
+<section class="configurator-hero">
+    <div class="configurator-hero__bg">
+        <img src="images/bg_main.jpg" alt="Конфигуратор" class="configurator-hero__img">
+        <div class="configurator-hero__overlay"></div>
+    </div>
+    <div class="container">
+        <div class="configurator-hero__content">
+            <span class="configurator-hero__badge">🛠 Онлайн-конфигуратор</span>
+            <h1 class="configurator-hero__title">Соберите свою<br>идеальную гриль-кухню</h1>
+            <p class="configurator-hero__subtitle">5 простых шагов — и вы узнаете точную стоимость вашей кухни</p>
+        </div>
+    </div>
+</section>
+
+<!-- ПРОГРЕСС-БАР -->
+<section class="configurator-progress">
+    <div class="container">
+        <div class="configurator-progress__bar">
+            <div class="configurator-progress__step active" data-step="1">
+                <div class="configurator-progress__number">1</div>
+                <div class="configurator-progress__label">Конфигурация</div>
+            </div>
+            <div class="configurator-progress__line"></div>
+            <div class="configurator-progress__step" data-step="2">
+                <div class="configurator-progress__number">2</div>
+                <div class="configurator-progress__label">Материал</div>
+            </div>
+            <div class="configurator-progress__line"></div>
+            <div class="configurator-progress__step" data-step="3">
+                <div class="configurator-progress__number">3</div>
+                <div class="configurator-progress__label">Гриль</div>
+            </div>
+            <div class="configurator-progress__line"></div>
+            <div class="configurator-progress__step" data-step="4">
+                <div class="configurator-progress__number">4</div>
+                <div class="configurator-progress__label">Размеры</div>
+            </div>
+            <div class="configurator-progress__line"></div>
+            <div class="configurator-progress__step" data-step="5">
+                <div class="configurator-progress__number">5</div>
+                <div class="configurator-progress__label">Заявка</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ОСНОВНОЙ КОНТЕНТ КОНФИГУРАТОРА -->
+<section class="configurator-main">
+    <div class="container">
+        <div class="configurator-layout">
+            
+            <!-- ЛЕВАЯ ЧАСТЬ: ШАГИ -->
+            <div class="configurator-steps">
+                
+                <!-- ШАГ 1: Конфигурация -->
+                <div class="configurator-step active" data-step="1">
+                    <h2 class="configurator-step__title">Выберите конфигурацию кухни</h2>
+                    <p class="configurator-step__subtitle">Определите форму вашей будущей кухни</p>
+                    
+                    <div class="configurator-options">
+                        <label class="configurator-card">
+                            <input type="radio" name="config" value="straight" checked data-price="150000">
+                            <div class="configurator-card__content">
+                                <div class="configurator-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="8" width="18" height="8" rx="1"/>
+                                    </svg>
+                                </div>
+                                <div class="configurator-card__info">
+                                    <h3 class="configurator-card__title">Прямая</h3>
+                                    <p class="configurator-card__desc">Классическая прямая форма</p>
+                                </div>
+                                <div class="configurator-card__price">от 150 000 BYN</div>
+                            </div>
+                        </label>
+
+                        <label class="configurator-card">
+                            <input type="radio" name="config" value="corner" data-price="195000">
+                            <div class="configurator-card__content">
+                                <div class="configurator-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 8h10v8H3zM13 8h8v16h-8z"/>
+                                    </svg>
+                                </div>
+                                <div class="configurator-card__info">
+                                    <h3 class="configurator-card__title">Угловая</h3>
+                                    <p class="configurator-card__desc">Оптимально для угловых помещений</p>
+                                </div>
+                                <div class="configurator-card__price">от 195 000 BYN</div>
+                            </div>
+                        </label>
+
+                        <label class="configurator-card">
+                            <input type="radio" name="config" value="u-shape" data-price="240000">
+                            <div class="configurator-card__content">
+                                <div class="configurator-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 8h6v8H3zM9 8h6v16H9zM15 8h6v8h-6z"/>
+                                    </svg>
+                                </div>
+                                <div class="configurator-card__info">
+                                    <h3 class="configurator-card__title">П-образная</h3>
+                                    <p class="configurator-card__desc">Максимум рабочей поверхности</p>
+                                </div>
+                                <div class="configurator-card__price">от 240 000 BYN</div>
+                            </div>
+                        </label>
+
+                        <label class="configurator-card">
+                            <input type="radio" name="config" value="island" data-price="270000">
+                            <div class="configurator-card__content">
+                                <div class="configurator-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="10" width="18" height="6" rx="1"/>
+                                        <rect x="8" y="14" width="8" height="6" rx="1"/>
+                                    </svg>
+                                </div>
+                                <div class="configurator-card__info">
+                                    <h3 class="configurator-card__title">С островком</h3>
+                                    <p class="configurator-card__desc">Для просторных площадок</p>
+                                </div>
+                                <div class="configurator-card__price">от 270 000 BYN</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- ШАГ 2: Материал -->
+                <div class="configurator-step" data-step="2">
+                    <h2 class="configurator-step__title">Выберите материал фасада</h2>
+                    <p class="configurator-step__subtitle">От материала зависит долговечность и внешний вид</p>
+                    
+                    <div class="configurator-options">
+                        <label class="configurator-card">
+                            <input type="radio" name="material" value="steel" checked data-price="0">
+                            <div class="configurator-card__content">
+                                <div class="configurator-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="9"/>
+                                        <path d="M12 3v18M3 12h18"/>
+                                    </svg>
+                                </div>
+                                <div class="configurator-card__info">
+                                    <h3 class="configurator-card__title">Нержавеющая сталь</h3>
+                                    <p class="configurator-card__desc">Классика, долговечность, простота ухода</p>
+                                </div>
+                                <div class="configurator-card__price">+0 BYN</div>
+                            </div>
+                        </label>
+
+                        <label class="configurator-card">
+                            <input type="radio" name="material" value="composite" data-price="45000">
+                            <div class="configurator-card__content">
+                                <div class="configurator-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                        <path d="M3 9h18M9 3v18"/>
+                                    </svg>
+                                </div>
+                                <div class="configurator-card__info">
+                                    <h3 class="configurator-card__title">Композит HPL</h3>
+                                    <p class="configurator-card__desc">Современный материал, устойчив к УФ</p>
+                                </div>
+                                <div class="configurator-card__price">+45 000 BYN</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- ШАГ 3: Гриль -->
+                <div class="configurator-step" data-step="3">
+                    <h2 class="configurator-step__title">Выберите тип гриля</h2>
+                    <p class="configurator-step__subtitle">От типа гриля зависит функциональность кухни</p>
+                    
+                    <div class="configurator-options">
+                        <label class="configurator-card">
+                            <input type="radio" name="grill" value="none" checked data-price="0">
+                            <div class="configurator-card__content">
+                                <div class="configurator-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <line x1="8" y1="12" x2="16" y2="12"/>
+                                    </svg>
+                                </div>
+                                <div class="configurator-card__info">
+                                    <h3 class="configurator-card__title">Без гриля</h3>
+                                    <p class="configurator-card__desc">Только кухонные модули</p>
+                                </div>
+                                <div class="configurator-card__price">+0 BYN</div>
+                            </div>
+                        </label>
+
+                        <label class="configurator-card">
+                            <input type="radio" name="grill" value="electric" data-price="50000">
+                            <div class="configurator-card__content">
+                                <div class="configurator-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                    </svg>
+                                </div>
+                                <div class="configurator-card__info">
+                                    <h3 class="configurator-card__title">Электрический</h3>
+                                    <p class="configurator-card__desc">Прост в использовании, быстрый нагрев</p>
+                                </div>
+                                <div class="configurator-card__price">+50 000 BYN</div>
+                            </div>
+                        </label>
+
+                        <label class="configurator-card">
+                            <input type="radio" name="grill" value="gas" data-price="80000">
+                            <div class="configurator-card__content">
+                                <div class="configurator-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 2c0 0-4 4-4 8a4 4 0 0 0 8 0c0-4-4-8-4-8z"/>
+                                    </svg>
+                                </div>
+                                <div class="configurator-card__info">
+                                    <h3 class="configurator-card__title">Газовый</h3>
+                                    <p class="configurator-card__desc">Классический вкус, контроль температуры</p>
+                                </div>
+                                <div class="configurator-card__price">+80 000 BYN</div>
+                            </div>
+                        </label>
+
+                        <label class="configurator-card">
+                            <input type="radio" name="grill" value="ceramic" data-price="120000">
+                            <div class="configurator-card__content">
+                                <div class="configurator-card__icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 2c0 0-6 6-6 12a6 6 0 0 0 12 0c0-6-6-12-6-12z"/>
+                                        <path d="M12 8c0 0-2 2-2 4a2 2 0 0 0 4 0c0-2-2-4-2-4z"/>
+                                    </svg>
+                                </div>
+                                <div class="configurator-card__info">
+                                    <h3 class="configurator-card__title">Керамический</h3>
+                                    <p class="configurator-card__desc">Премиум-класс, идеальный вкус</p>
+                                </div>
+                                <div class="configurator-card__price">+120 000 BYN</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- ШАГ 4: Размеры и допы -->
+                <div class="configurator-step" data-step="4">
+                    <h2 class="configurator-step__title">Размеры и дополнительные опции</h2>
+                    <p class="configurator-step__subtitle">Уточните длину и выберите полезные дополнения</p>
+                    
+                    <div class="configurator-section">
+                        <h3 class="configurator-section__title">Длина кухни</h3>
+                        <div class="configurator-options configurator-options--horizontal">
+                            <label class="configurator-card configurator-card--small">
+                                <input type="radio" name="size" value="2.2" checked data-price="0">
+                                <div class="configurator-card__content">
+                                    <h3 class="configurator-card__title">2,2 п.м</h3>
+                                    <p class="configurator-card__desc">Компактный вариант</p>
+                                </div>
+                            </label>
+                            <label class="configurator-card configurator-card--small">
+                                <input type="radio" name="size" value="2.8" data-price="35000">
+                                <div class="configurator-card__content">
+                                    <h3 class="configurator-card__title">2,8 п.м</h3>
+                                    <p class="configurator-card__desc">Оптимальный размер</p>
+                                </div>
+                            </label>
+                            <label class="configurator-card configurator-card--small">
+                                <input type="radio" name="size" value="3+" data-price="70000">
+                                <div class="configurator-card__content">
+                                    <h3 class="configurator-card__title">3+ п.м</h3>
+                                    <p class="configurator-card__desc">Максимум пространства</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="configurator-section">
+                        <h3 class="configurator-section__title">Дополнительные опции</h3>
+                        <div class="configurator-extras">
+                            <label class="configurator-extra">
+                                <input type="checkbox" name="extra" value="lighting" data-price="30000">
+                                <div class="configurator-extra__content">
+                                    <div class="configurator-extra__icon">💡</div>
+                                    <div class="configurator-extra__info">
+                                        <h4 class="configurator-extra__title">LED-подсветка</h4>
+                                        <p class="configurator-extra__desc">Подсветка рабочей зоны</p>
+                                    </div>
+                                    <div class="configurator-extra__price">+30 000 BYN</div>
+                                </div>
+                            </label>
+
+                            <label class="configurator-extra">
+                                <input type="checkbox" name="extra" value="hood" data-price="40000">
+                                <div class="configurator-extra__content">
+                                    <div class="configurator-extra__icon">💨</div>
+                                    <div class="configurator-extra__info">
+                                        <h4 class="configurator-extra__title">Вытяжка</h4>
+                                        <p class="configurator-extra__desc">Встроенная система вентиляции</p>
+                                    </div>
+                                    <div class="configurator-extra__price">+40 000 BYN</div>
+                                </div>
+                            </label>
+
+                            <label class="configurator-extra">
+                                <input type="checkbox" name="extra" value="sink" data-price="25000">
+                                <div class="configurator-extra__content">
+                                    <div class="configurator-extra__icon">🚰</div>
+                                    <div class="configurator-extra__info">
+                                        <h4 class="configurator-extra__title">Мойка</h4>
+                                        <p class="configurator-extra__desc">Встроенная мойка из нержавейки</p>
+                                    </div>
+                                    <div class="configurator-extra__price">+25 000 BYN</div>
+                                </div>
+                            </label>
+
+                            <label class="configurator-extra">
+                                <input type="checkbox" name="extra" value="storage" data-price="35000">
+                                <div class="configurator-extra__content">
+                                    <div class="configurator-extra__icon">🗄️</div>
+                                    <div class="configurator-extra__info">
+                                        <h4 class="configurator-extra__title">Система хранения</h4>
+                                        <p class="configurator-extra__desc">Выдвижные ящики и полки</p>
+                                    </div>
+                                    <div class="configurator-extra__price">+35 000 BYN</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ШАГ 5: Заявка -->
+                <div class="configurator-step" data-step="5">
+                    <h2 class="configurator-step__title">Оформите заявку</h2>
+                    <p class="configurator-step__subtitle">Оставьте контакты — мы свяжемся с вами в течение 15 минут</p>
+                    
+                    <div class="configurator-summary">
+                        <h3 class="configurator-summary__title">Ваша конфигурация:</h3>
+                        <div class="configurator-summary__list" id="summaryList">
+                            <!-- Заполняется через JS -->
+                        </div>
+                        <div class="configurator-summary__total">
+                            <span class="configurator-summary__label">Итого:</span>
+                            <span class="configurator-summary__price" id="totalPrice">0 BYN</span>
+                        </div>
+                    </div>
+
+                    <form class="configurator-form" id="configuratorForm">
+                        <div class="form-group">
+                            <label class="form-label">Ваше имя *</label>
+                            <input type="text" class="form-input" name="name" placeholder="Иван Иванов" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Телефон *</label>
+                            <input type="tel" class="form-input" name="phone" placeholder="+375 (__) ___-__-__" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" name="email" placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Комментарий</label>
+                            <textarea class="form-input" name="comment" rows="3" placeholder="Дополнительные пожелания..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full">Отправить заявку</button>
+                        <p class="configurator-form__privacy">Нажимая кнопку, вы соглашаетесь на обработку персональных данных</p>
+                    </form>
+                </div>
+
+                <!-- НАВИГАЦИЯ МЕЖДУ ШАГАМИ -->
+                <div class="configurator-navigation">
+                    <button class="btn btn--outline" id="prevStep" style="display: none;">← Назад</button>
+                    <button class="btn btn--primary" id="nextStep">Далее →</button>
+                </div>
+            </div>
+
+            <!-- ПРАВАЯ ЧАСТЬ: ИТОГ -->
+            <div class="configurator-sidebar">
+                <div class="configurator-sidebar__card">
+                    <h3 class="configurator-sidebar__title">Текущая конфигурация</h3>
+                    
+                    <div class="configurator-preview">
+                        <div class="configurator-preview__image">
+                            <img src="images/кухня1.png" alt="Превью" id="previewImage">
+                        </div>
+                    </div>
+
+                    <div class="configurator-sidebar__specs" id="sidebarSpecs">
+                        <div class="configurator-sidebar__spec">
+                            <span class="configurator-sidebar__spec-label">Конфигурация:</span>
+                            <span class="configurator-sidebar__spec-value" id="specConfig">Прямая</span>
+                        </div>
+                        <div class="configurator-sidebar__spec">
+                            <span class="configurator-sidebar__spec-label">Материал:</span>
+                            <span class="configurator-sidebar__spec-value" id="specMaterial">Нержавеющая сталь</span>
+                        </div>
+                        <div class="configurator-sidebar__spec">
+                            <span class="configurator-sidebar__spec-label">Гриль:</span>
+                            <span class="configurator-sidebar__spec-value" id="specGrill">Без гриля</span>
+                        </div>
+                        <div class="configurator-sidebar__spec">
+                            <span class="configurator-sidebar__spec-label">Размер:</span>
+                            <span class="configurator-sidebar__spec-value" id="specSize">2,2 п.м</span>
+                        </div>
+                    </div>
+
+                    <div class="configurator-sidebar__total">
+                        <span class="configurator-sidebar__total-label">Предварительная цена:</span>
+                        <span class="configurator-sidebar__total-price" id="sidebarPrice">150 000 BYN</span>
+                    </div>
+
+                    <div class="configurator-sidebar__note">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <span>Точная цена после замера</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer__grid">
+            <div class="footer__col footer__col--nav">
+                <h4 class="footer__title">Навигация</h4>
+                <nav class="footer__nav">
+                    <a href="index.html" class="footer__link">Главная</a>
+                    <a href="products.html" class="footer__link">Каталог</a>
+                    <a href="configurator.html" class="footer__link">Конфигуратор</a>
+                    <a href="auth.html" class="footer__link">Войти</a>
+                </nav>
+            </div>
+            <div class="footer__col footer__col--contact">
+                <a href="tel:+375257486784" class="footer__phone">+375 25 748 67 84</a>
+                <div class="footer__legal">
+                    <a href="#" class="footer__legal-link">Политика конфиденциальности</a>
+                    <a href="#" class="footer__legal-link">Пользовательское соглашение</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- МОДАЛКА: Заказать звонок -->
+<div class="modal" id="callbackModal">
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__content">
+        <button class="modal__close" data-close-modal aria-label="Закрыть">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <h3 class="modal__title">Заказать звонок</h3>
+        <p class="modal__subtitle">Оставьте ваш номер телефона, и мы перезвоним вам в течение 15 минут</p>
+        <form class="modal__form" id="callbackForm">
+            <div class="form-group">
+                <input type="text" class="form-input" placeholder="Ваше имя" required>
+            </div>
+            <div class="form-group">
+                <div class="phone-input">
+                    <span class="phone-code">+375</span>
+                    <input type="tel" class="form-input" placeholder="(25) 748-67-84" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full">Перезвоните мне</button>
+            <p class="modal__privacy">Нажимая кнопку, вы даете согласие на обработку персональных данных</p>
+        </form>
+    </div>
+</div>
+
+<script src="settings.js" defer></script>
+<script src="configurator.js" defer></script>
+</body>
+</html>

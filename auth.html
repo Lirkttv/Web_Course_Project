@@ -17,104 +17,122 @@
                 <p>Премиальные гриль-кухни</p>
             </div>
 
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login">Вход</button>
-                <button class="auth-tab" data-tab="register">Регистрация</button>
+            <!-- БЛОК АВТОРИЗОВАННОГО ПОЛЬЗОВАТЕЛЯ -->
+            <div class="auth-user-info" id="userInfoBlock" style="display:none;">
+                <div class="auth-user-avatar" id="userAvatar">U</div>
+                <h3 class="auth-user-name" id="userName">Пользователь</h3>
+                <p class="auth-user-email" id="userEmail">email@example.com</p>
+                <p class="auth-user-nick" id="userNick">@nickname</p>
+                <div class="auth-user-actions">
+                    <a href="index.html" class="btn btn--primary btn--full">На главную</a>
+                    <button type="button" class="btn btn--outline btn--full" id="logoutBtn">Выйти</button>
+                </div>
             </div>
 
-            <div class="auth-message" id="authMessage"></div>
-
-            <!-- ФОРМА ВХОДА -->
-            <form class="auth-form active" id="loginForm" novalidate>
-                <div class="form-group">
-                    <label class="form-label">Email или Телефон</label>
-                    <input type="text" class="form-input" name="login" placeholder="example@mail.com или +375..." required>
-                    <div class="error-message" id="loginUserError">Введите email или телефон</div>
+            <!-- БЛОК ФОРМ -->
+            <div id="authFormsBlock">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Вход</button>
+                    <button class="auth-tab" data-tab="register">Регистрация</button>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Пароль</label>
-                    <input type="password" class="form-input" name="password" placeholder="Введите пароль" required>
-                    <div class="error-message" id="loginPassError">Введите пароль</div>
-                </div>
-                <button type="submit" class="auth-submit" id="loginSubmit">Войти</button>
-            </form>
 
-            <!-- ФОРМА РЕГИСТРАЦИИ -->
-            <form class="auth-form" id="registerForm" novalidate>
-                <div class="form-row">
+                <div class="auth-message" id="authMessage"></div>
+
+                <!-- ФОРМА ВХОДА -->
+                <form class="auth-form active" id="loginForm" novalidate>
                     <div class="form-group">
-                        <label class="form-label">Фамилия *</label>
-                        <input type="text" class="form-input" name="lastname" required>
+                        <label class="form-label">Email или Телефон</label>
+                        <input type="text" class="form-input" name="login" placeholder="example@mail.com или +375..." required>
+                        <div class="error-message">Введите email или телефон</div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Имя *</label>
-                        <input type="text" class="form-input" name="firstname" required>
+                        <label class="form-label">Пароль</label>
+                        <input type="password" class="form-input" name="password" placeholder="Введите пароль" required>
+                        <div class="error-message">Введите пароль</div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Отчество</label>
-                    <input type="text" class="form-input" name="patronymic">
-                </div>
+                    <button type="submit" class="auth-submit" id="loginSubmit">Войти</button>
+                </form>
 
-                <div class="form-group">
-                    <label class="form-label">Дата рождения *</label>
-                    <input type="date" class="form-input" name="dob" required>
-                    <div class="error-message" id="regDobError">Вам должно быть не менее 16 лет</div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Телефон (РБ) *</label>
-                    <input type="tel" class="form-input" name="phone" placeholder="+375 (__) ___-__-__" required>
-                    <div class="error-message" id="regPhoneError">Введите корректный номер РБ (+375)</div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Email *</label>
-                    <input type="email" class="form-input" name="email" placeholder="your@email.com" required>
-                    <div class="error-message" id="regEmailError">Введите корректный email</div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Способ задания пароля</label>
-                    <div class="radio-group">
-                        <label class="radio-label"><input type="radio" name="passMethod" value="manual" checked> Самостоятельно</label>
-                        <label class="radio-label"><input type="radio" name="passMethod" value="auto"> Автоматически</label>
-                    </div>
-                </div>
-
-                <div id="manualPassFields">
-                    <div class="form-group">
-                        <label class="form-label">Пароль *</label>
-                        <input type="password" class="form-input" name="password" required>
-                        <div class="error-message" id="regPassError">8-20 символов: заглавная, строчная, цифра, спецсимвол. Не из топ-100.</div>
+                <!-- ФОРМА РЕГИСТРАЦИИ -->
+                <form class="auth-form" id="registerForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Фамилия *</label>
+                            <input type="text" class="form-input" name="lastname" required>
+                            <div class="error-message">Введите фамилию</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Имя *</label>
+                            <input type="text" class="form-input" name="firstname" required>
+                            <div class="error-message">Введите имя</div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Подтвердите пароль *</label>
-                        <input type="password" class="form-input" name="confirm_password" onpaste="return false" required>
-                        <div class="error-message" id="regConfirmError">Пароли не совпадают</div>
+                        <label class="form-label">Отчество</label>
+                        <input type="text" class="form-input" name="patronymic">
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="form-label">Никнейм</label>
-                    <div class="nickname-container">
-                        <input type="text" class="form-input" id="nicknameInput" readonly>
-                        <button type="button" class="btn-icon" id="regenNick" aria-label="Обновить никнейм">🔄</button>
-                        <input type="text" class="form-input" id="customNickInput" style="display:none;" placeholder="Введите никнейм (3-20 символов)">
+                    <div class="form-group">
+                        <label class="form-label">Дата рождения *</label>
+                        <input type="date" class="form-input" name="dob" required>
+                        <div class="error-message" id="regDobError">Вам должно быть не менее 16 лет</div>
                     </div>
-                    <div class="error-message" id="regNickError">Минимум 3 символа, только латиница и цифры</div>
-                </div>
 
-                <div class="form-group checkbox-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="consent" required>
-                        <span>Я согласен с правилами и политикой конфиденциальности *</span>
-                    </label>
-                    <div class="error-message" id="regConsentError">Необходимо согласие для регистрации</div>
-                </div>
+                    <div class="form-group">
+                        <label class="form-label">Телефон (РБ) *</label>
+                        <input type="tel" class="form-input" name="phone" placeholder="+375 (__) ___-__-__" required>
+                        <div class="error-message" id="regPhoneError">Введите корректный номер РБ (+375)</div>
+                    </div>
 
-                <button type="submit" class="auth-submit" id="registerSubmit">Зарегистрироваться</button>
-            </form>
+                    <div class="form-group">
+                        <label class="form-label">Email *</label>
+                        <input type="email" class="form-input" name="email" placeholder="your@email.com" required>
+                        <div class="error-message" id="regEmailError">Введите корректный email</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Способ задания пароля</label>
+                        <div class="radio-group">
+                            <label class="radio-label"><input type="radio" name="passMethod" value="manual" checked> Самостоятельно</label>
+                            <label class="radio-label"><input type="radio" name="passMethod" value="auto"> Автоматически</label>
+                        </div>
+                    </div>
+
+                    <div id="manualPassFields">
+                        <div class="form-group">
+                            <label class="form-label">Пароль *</label>
+                            <input type="password" class="form-input" name="password" required>
+                            <div class="error-message" id="regPassError">8-20 символов: заглавная, строчная, цифра, спецсимвол</div>
+                            <div class="password-strength" id="passStrength"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Подтвердите пароль *</label>
+                            <input type="password" class="form-input" name="confirm_password" onpaste="return false" required>
+                            <div class="error-message" id="regConfirmError">Пароли не совпадают</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Никнейм</label>
+                        <div class="nickname-container">
+                            <input type="text" class="form-input" id="nicknameInput" readonly>
+                            <button type="button" class="btn-icon" id="regenNick" aria-label="Обновить никнейм">🔄</button>
+                            <input type="text" class="form-input" id="customNickInput" style="display:none;" placeholder="Введите никнейм (3-20 символов)">
+                        </div>
+                        <div class="error-message" id="regNickError">Минимум 3 символа, только латиница и цифры</div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="consent" required>
+                            <span>Я согласен с правилами и политикой конфиденциальности *</span>
+                        </label>
+                        <div class="error-message" id="regConsentError">Необходимо согласие</div>
+                    </div>
+
+                    <button type="submit" class="auth-submit" id="registerSubmit">Зарегистрироваться</button>
+                </form>
+            </div>
 
             <div class="auth-back">
                 <a href="index.html">← Вернуться на главную</a>
@@ -122,18 +140,132 @@
         </div>
     </div>
 
+    <style>
+        .auth-user-info { text-align: center; padding: 20px 0; }
+        .auth-user-avatar {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: var(--color-primary); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; font-weight: 700; margin: 0 auto 15px;
+            text-transform: uppercase;
+        }
+        .auth-user-name { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin-bottom: 5px; }
+        .auth-user-email { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px; }
+        .auth-user-nick { color: var(--color-primary); font-size: 0.9rem; font-weight: 600; margin-bottom: 25px; }
+        .auth-user-actions { display: flex; flex-direction: column; gap: 10px; }
+        .password-strength {
+            margin-top: 8px; height: 4px; background: var(--border-color);
+            border-radius: 2px; overflow: hidden;
+        }
+        .password-strength::after {
+            content: ''; display: block; height: 100%; width: 0;
+            transition: all 0.3s ease;
+        }
+        .password-strength.weak::after { width: 33%; background: #e74c3c; }
+        .password-strength.medium::after { width: 66%; background: #f39c12; }
+        .password-strength.strong::after { width: 100%; background: #27ae60; }
+    </style>
+
     <script>
-        // ===== ОБЩИЕ ЭЛЕМЕНТЫ =====
+        // ===== КОНФИГУРАЦИЯ API =====
+        const API_URL = 'http://localhost:3000';
+
+        // ===== УТИЛИТЫ =====
+        async function hashPassword(password) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password + '_grill_salt_2024');
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function generateToken() {
+            const arr = new Uint8Array(32);
+            crypto.getRandomValues(arr);
+            return Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function showMessage(type, text) {
+            const authMessage = document.getElementById('authMessage');
+            authMessage.className = `auth-message ${type}`;
+            authMessage.textContent = text;
+            authMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function showFieldError(input, show) {
+            if (!input) return;
+            input.classList.toggle('error', show);
+            const errEl = input.parentElement.querySelector('.error-message');
+            if (errEl) errEl.classList.toggle('visible', show);
+        }
+
+        // ===== ПРОВЕРКА СЕССИИ ПРИ ЗАГРУЗКЕ =====
+        (async function checkSession() {
+            const sessionData = localStorage.getItem('auth_session');
+            if (!sessionData) return;
+
+            try {
+                const session = JSON.parse(sessionData);
+                // Проверяем срок действия
+                if (new Date(session.expires_at) < new Date()) {
+                    localStorage.removeItem('auth_session');
+                    return;
+                }
+                // Проверяем существование сессии на сервере
+                const res = await fetch(`${API_URL}/sessions?token=${session.token}`);
+                const sessions = await res.json();
+                if (sessions.length > 0) {
+                    showUserInfo(session.user);
+                } else {
+                    localStorage.removeItem('auth_session');
+                }
+            } catch (e) {
+                console.warn('Сервер недоступен. Используем локальную сессию.');
+                const session = JSON.parse(sessionData);
+                if (new Date(session.expires_at) > new Date()) {
+                    showUserInfo(session.user);
+                }
+            }
+        })();
+
+        // ===== ПОКАЗ ИНФОРМАЦИИ О ПОЛЬЗОВАТЕЛЕ =====
+        function showUserInfo(user) {
+            document.getElementById('userAvatar').textContent = (user.firstname || user.nickname || 'U')[0];
+            document.getElementById('userName').textContent = 
+                `${user.firstname || ''} ${user.lastname || ''}`.trim() || user.nickname || 'Пользователь';
+            document.getElementById('userEmail').textContent = user.email || '';
+            document.getElementById('userNick').textContent = user.nickname ? `@${user.nickname}` : '';
+            document.getElementById('userInfoBlock').style.display = 'block';
+            document.getElementById('authFormsBlock').style.display = 'none';
+        }
+
+        // ===== ВЫХОД =====
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            const sessionData = localStorage.getItem('auth_session');
+            if (sessionData) {
+                try {
+                    const session = JSON.parse(sessionData);
+                    // Удаляем сессию с сервера
+                    const res = await fetch(`${API_URL}/sessions?token=${session.token}`);
+                    const sessions = await res.json();
+                    if (sessions.length > 0) {
+                        await fetch(`${API_URL}/sessions/${sessions[0].id}`, { method: 'DELETE' });
+                    }
+                } catch (e) {
+                    console.warn('Не удалось удалить сессию на сервере');
+                }
+            }
+            localStorage.removeItem('auth_session');
+            document.getElementById('userInfoBlock').style.display = 'none';
+            document.getElementById('authFormsBlock').style.display = 'block';
+            showMessage('success', 'Вы успешно вышли из аккаунта');
+        });
+
+        // ===== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК =====
         const tabs = document.querySelectorAll('.auth-tab');
         const loginForm = document.getElementById('loginForm');
         const registerForm = document.getElementById('registerForm');
-        const authMessage = document.getElementById('authMessage');
-        const manualPassFields = document.getElementById('manualPassFields');
-        const regenNickBtn = document.getElementById('regenNick');
-        const nicknameInput = document.getElementById('nicknameInput');
-        const customNickInput = document.getElementById('customNickInput');
 
-        // ===== ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК =====
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 tabs.forEach(t => t.classList.remove('active'));
@@ -141,14 +273,15 @@
                 const target = tab.dataset.tab;
                 loginForm.classList.toggle('active', target === 'login');
                 registerForm.classList.toggle('active', target === 'register');
-                authMessage.className = 'auth-message';
-                authMessage.textContent = '';
+                document.getElementById('authMessage').className = 'auth-message';
+                document.getElementById('authMessage').textContent = '';
                 document.querySelectorAll('.error-message').forEach(e => e.classList.remove('visible'));
                 document.querySelectorAll('.form-input').forEach(i => i.classList.remove('error'));
             });
         });
 
         // ===== СПОСОБ ПАРОЛЯ =====
+        const manualPassFields = document.getElementById('manualPassFields');
         document.querySelectorAll('input[name="passMethod"]').forEach(radio => {
             radio.addEventListener('change', (e) => {
                 manualPassFields.style.display = e.target.value === 'manual' ? 'block' : 'none';
@@ -158,6 +291,9 @@
         // ===== ГЕНЕРАЦИЯ НИКНЕЙМА =====
         const prefixes = ['Grill', 'Fire', 'Smoke', 'Chef', 'Baron', 'King', 'Master', 'Pro', 'Elite', 'Urban'];
         const suffixes = ['Kitchen', 'Griller', 'Smoker', 'Cook', 'Zone', 'House', 'Studio', 'Lab', 'Craft', 'Base'];
+        const regenNickBtn = document.getElementById('regenNick');
+        const nicknameInput = document.getElementById('nicknameInput');
+        const customNickInput = document.getElementById('customNickInput');
         let regenCount = 0;
 
         function generateNickname() {
@@ -178,46 +314,49 @@
         }
 
         regenNickBtn.addEventListener('click', updateNicknameUI);
-        updateNicknameUI(); // Первая генерация при загрузке
+        updateNicknameUI();
 
         // ===== МАСКА ТЕЛЕФОНА РБ =====
         const phoneInput = document.querySelector('input[name="phone"]');
         phoneInput.addEventListener('input', (e) => {
             let val = e.target.value.replace(/\D/g, '');
             if (!val.startsWith('375')) val = '375' + val;
+            val = val.substring(0, 12);
             let formatted = '+375';
             if (val.length > 3) formatted += ' (' + val.substring(3, 5);
-            if (val.length > 5) formatted += ') ' + val.substring(5, 8);
-            if (val.length > 8) formatted += '-' + val.substring(8, 10);
-            if (val.length > 10) formatted += '-' + val.substring(10, 12);
+            if (val.length >= 5) formatted += ') ' + val.substring(5, 8);
+            if (val.length >= 8) formatted += '-' + val.substring(8, 10);
+            if (val.length >= 10) formatted += '-' + val.substring(10, 12);
             e.target.value = formatted;
         });
 
-        // ===== УТИЛИТЫ =====
-        function showMessage(type, text) {
-            authMessage.className = `auth-message ${type}`;
-            authMessage.textContent = text;
-        }
-        function showInputError(name, show) {
-            const input = document.querySelector(`input[name="${name}"]`);
-            const error = document.getElementById(`${name}Error`);
-            if (input) input.classList.toggle('error', show);
-            if (error) error.classList.toggle('visible', show);
+        // ===== ИНДИКАТОР СИЛЫ ПАРОЛЯ =====
+        const passInput = document.querySelector('input[name="password"]');
+        const passStrength = document.getElementById('passStrength');
+        if (passInput && passStrength) {
+            passInput.addEventListener('input', (e) => {
+                const val = e.target.value;
+                passStrength.className = 'password-strength';
+                if (val.length === 0) return;
+                let score = 0;
+                if (val.length >= 8) score++;
+                if (/[a-z]/.test(val) && /[A-Z]/.test(val)) score++;
+                if (/\d/.test(val)) score++;
+                if (/[@$!%*?&]/.test(val)) score++;
+                if (val.length >= 12) score++;
+                
+                if (score <= 2) passStrength.classList.add('weak');
+                else if (score <= 3) passStrength.classList.add('medium');
+                else passStrength.classList.add('strong');
+            });
         }
 
-        // ТОП-100 ПАРОЛЕЙ 2023 (СОКРАЩЁННЫЙ СПИСОК ДЛЯ ПРОВЕРКИ)
+        // ТОП-100 ПАРОЛЕЙ
         const badPasswords = new Set([
             '123456','password','qwerty','12345678','12345','123456789','football','shadow','sunshine','princess',
             'trustno1','iloveyou','batman','welcome','login','starwars','letmein','dragon','master','monkey',
-            'abc123','admin','admin123','passw0rd','p@ssword','qwerty123','1234567','password1','1q2w3e4r','1q2w3e4r5t',
-            'qazwsx','zaq12wsx','monkey123','123123','test','pass','guest','master123','changeme','123321','654321',
-            'qwerty1','asdfgh','zxcvbn','1234qwer','qwer1234','p@$$w0rd','hello','charlie','donald','password123',
-            'qwertyuiop','123456a','1234567a','abc12345','password12','12345678a','a1234567','123456789a','zxcvbnm',
-            'asdfghjkl','poiuytrewq','0987654321','qazxswedc','1qaz2wsx','1234567890','12345678910','111111','000000',
-            '666666','888888','999999','777777','555555','444444','333333','222222','112233','121212','123123','123456789',
-            'qwerty','abc123','monkey','1234567','letmein','trustno1','dragon','baseball','master','michael','football',
-            'password1','iloveyou','shadow','sunshine','princess','access','harley','ranger','buster','soccer','jordan',
-            'batman','superman','hannah','amanda','jessica','pepper','daniel','andrew','joshua','alexander'
+            'abc123','admin','admin123','passw0rd','qwerty123','1234567','password1','1q2w3e4r','1q2w3e4r5t',
+            'qazwsx','zaq12wsx','monkey123','123123','test','pass','guest','master123','changeme','123321','654321'
         ]);
 
         // ===== РЕГИСТРАЦИЯ =====
@@ -230,78 +369,151 @@
             formData.forEach((val, key) => data[key] = val);
 
             // Валидация ФИО
-            if (!data.lastname.trim() || !data.firstname.trim()) {
-                showInputError('lastname', true); showInputError('firstname', true); hasError = true;
-            } else {
-                showInputError('lastname', false); showInputError('firstname', false);
-            }
+            const lastnameInput = registerForm.querySelector('input[name="lastname"]');
+            const firstnameInput = registerForm.querySelector('input[name="firstname"]');
+            if (!data.lastname.trim()) { showFieldError(lastnameInput, true); hasError = true; }
+            else showFieldError(lastnameInput, false);
+            if (!data.firstname.trim()) { showFieldError(firstnameInput, true); hasError = true; }
+            else showFieldError(firstnameInput, false);
 
-            // Валидация возраста (>= 16)
+            // Возраст >= 16
+            const dobInput = registerForm.querySelector('input[name="dob"]');
             if (data.dob) {
                 const age = Math.floor((new Date() - new Date(data.dob)) / (365.25 * 24 * 60 * 60 * 1000));
-                if (age < 16) { showInputError('dob', true); hasError = true; }
-                else showInputError('dob', false);
-            } else { showInputError('dob', true); hasError = true; }
+                if (age < 16) { showFieldError(dobInput, true); hasError = true; }
+                else showFieldError(dobInput, false);
+            } else { showFieldError(dobInput, true); hasError = true; }
 
-            // Валидация телефона РБ
-            const phoneRegex = /^\+375\s?\(?[1234]\d{2}\)?\s?\d{3}[-\s]?\d{2}[-\s]?\d{2}$/;
-            if (!phoneRegex.test(data.phone)) { showInputError('phone', true); hasError = true; }
-            else showInputError('phone', false);
+            // Телефон РБ
+            const phoneRegex = /^\+375\s?\(?[1234]\d{2}\)?\s?\d{3}-\d{2}-\d{2}$/;
+            if (!phoneRegex.test(data.phone)) {
+                showFieldError(registerForm.querySelector('input[name="phone"]'), true);
+                hasError = true;
+            } else {
+                showFieldError(registerForm.querySelector('input[name="phone"]'), false);
+            }
 
-            // Валидация Email
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) { showInputError('email', true); hasError = true; }
-            else showInputError('email', false);
+            // Email
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+                showFieldError(registerForm.querySelector('input[name="email"]'), true);
+                hasError = true;
+            } else {
+                showFieldError(registerForm.querySelector('input[name="email"]'), false);
+            }
 
-            // Валидация Пароля
+            // Пароль
             if (data.passMethod === 'manual') {
                 const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
-                if (!passRegex.test(data.password)) { showInputError('password', true); hasError = true; }
-                else showInputError('password', false);
+                const passField = registerForm.querySelector('input[name="password"]');
+                const confirmField = registerForm.querySelector('input[name="confirm_password"]');
+                
+                if (!passRegex.test(data.password)) { showFieldError(passField, true); hasError = true; }
+                else showFieldError(passField, false);
 
-                if (data.password !== data.confirm_password) { showInputError('confirm_password', true); hasError = true; }
-                else showInputError('confirm_password', false);
+                if (data.password !== data.confirm_password) { showFieldError(confirmField, true); hasError = true; }
+                else showFieldError(confirmField, false);
 
                 if (badPasswords.has(data.password.toLowerCase())) {
                     showMessage('error', 'Пароль слишком распространённый. Выберите другой.');
                     hasError = true;
                 }
             } else {
-                // Автогенерация пароля
-                data.password = Math.random().toString(36).slice(-10) + 'A1!';
-                data.confirm_password = data.password;
+                // Автогенерация
+                const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%';
+                let autoPass = '';
+                for (let i = 0; i < 12; i++) autoPass += chars[Math.floor(Math.random() * chars.length)];
+                data.password = autoPass;
+                data.confirm_password = autoPass;
+                showMessage('success', `Ваш пароль: ${autoPass}. Сохраните его!`);
             }
 
-            // Валидация Никнейма
+            // Никнейм
             let nickname = customNickInput.style.display === 'block' ? customNickInput.value : nicknameInput.value;
             if (nickname.length < 3 || !/^[a-zA-Z0-9_]+$/.test(nickname)) {
-                document.getElementById('regNickError').classList.add('visible'); hasError = true;
+                document.getElementById('regNickError').classList.add('visible');
+                hasError = true;
             } else {
                 document.getElementById('regNickError').classList.remove('visible');
             }
             data.nickname = nickname;
 
             // Согласие
-            if (!data.consent) { document.getElementById('regConsentError').classList.add('visible'); hasError = true; }
-            else document.getElementById('regConsentError').classList.remove('visible');
+            if (!data.consent) {
+                document.getElementById('regConsentError').classList.add('visible');
+                hasError = true;
+            } else {
+                document.getElementById('regConsentError').classList.remove('visible');
+            }
 
             if (hasError) return;
 
             const btn = document.getElementById('registerSubmit');
-            btn.disabled = true; btn.textContent = 'Регистрация...';
+            btn.disabled = true;
+            btn.textContent = 'Регистрация...';
 
             try {
-                const res = await fetch('auth.php', {
+                // Проверяем уникальность email, телефона, никнейма
+                const [emailCheck, phoneCheck, nickCheck] = await Promise.all([
+                    fetch(`${API_URL}/users?email=${encodeURIComponent(data.email)}`).then(r => r.json()),
+                    fetch(`${API_URL}/users?phone=${encodeURIComponent(data.phone)}`).then(r => r.json()),
+                    fetch(`${API_URL}/users?nickname=${encodeURIComponent(data.nickname)}`).then(r => r.json())
+                ]);
+
+                if (emailCheck.length > 0) {
+                    showMessage('error', 'Email уже зарегистрирован');
+                    btn.disabled = false; btn.textContent = 'Зарегистрироваться';
+                    return;
+                }
+                if (phoneCheck.length > 0) {
+                    showMessage('error', 'Телефон уже зарегистрирован');
+                    btn.disabled = false; btn.textContent = 'Зарегистрироваться';
+                    return;
+                }
+                if (nickCheck.length > 0) {
+                    showMessage('error', 'Никнейм занят');
+                    btn.disabled = false; btn.textContent = 'Зарегистрироваться';
+                    return;
+                }
+
+                // Хешируем пароль
+                const passwordHash = await hashPassword(data.password);
+
+                // Создаём пользователя
+                const newUser = {
+                    lastname: data.lastname,
+                    firstname: data.firstname,
+                    patronymic: data.patronymic || '',
+                    dob: data.dob,
+                    phone: data.phone,
+                    email: data.email,
+                    passwordHash: passwordHash,
+                    nickname: data.nickname,
+                    created_at: new Date().toISOString()
+                };
+
+                const res = await fetch(`${API_URL}/users`, {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ action: 'register', ...data })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newUser)
                 });
-                const result = await res.json();
-                if (result.success) {
+
+                if (res.ok) {
                     showMessage('success', 'Регистрация успешна! Теперь войдите.');
+                    registerForm.reset();
+                    updateNicknameUI();
+                    regenCount = 0;
+                    regenNickBtn.style.display = 'block';
+                    customNickInput.style.display = 'none';
                     setTimeout(() => { tabs[0].click(); }, 2000);
-                } else showMessage('error', result.message);
-            } catch { showMessage('error', 'Ошибка соединения'); }
-            btn.disabled = false; btn.textContent = 'Зарегистрироваться';
+                } else {
+                    showMessage('error', 'Ошибка при регистрации');
+                }
+            } catch (err) {
+                showMessage('error', 'Сервер недоступен. Запустите: npm run server');
+            }
+            
+            btn.disabled = false;
+            btn.textContent = 'Зарегистрироваться';
         });
 
         // ===== ВХОД =====
@@ -310,25 +522,82 @@
             const login = loginForm.login.value.trim();
             const pass = loginForm.password.value;
             let err = false;
-            if (!login) { showInputError('login', true); err = true; } else showInputError('login', false);
-            if (!pass) { showInputError('password', true); err = true; } else showInputError('password', false);
+            
+            if (!login) { showFieldError(loginForm.login, true); err = true; }
+            else showFieldError(loginForm.login, false);
+            
+            if (!pass) { showFieldError(loginForm.password, true); err = true; }
+            else showFieldError(loginForm.password, false);
+            
             if (err) return;
 
             const btn = document.getElementById('loginSubmit');
-            btn.disabled = true; btn.textContent = 'Входим...';
+            btn.disabled = true;
+            btn.textContent = 'Входим...';
+
             try {
-                const res = await fetch('auth.php', {
+                // Ищем пользователя по email или телефону
+                const res = await fetch(`${API_URL}/users?q=${encodeURIComponent(login)}`);
+                const users = await res.json();
+                
+                const user = users.find(u => u.email === login || u.phone === login);
+                
+                if (!user) {
+                    showMessage('error', 'Пользователь не найден');
+                    btn.disabled = false; btn.textContent = 'Войти';
+                    return;
+                }
+
+                // Проверяем пароль
+                const passwordHash = await hashPassword(pass);
+                if (user.passwordHash !== passwordHash) {
+                    showMessage('error', 'Неверный пароль');
+                    btn.disabled = false; btn.textContent = 'Войти';
+                    return;
+                }
+
+                // Создаём сессию
+                const token = generateToken();
+                const expires_at = new Date(Date.now() + 7*24*60*60*1000).toISOString();
+                
+                const sessionData = {
+                    token: token,
+                    user_id: user.id,
+                    nickname: user.nickname,
+                    expires_at: expires_at,
+                    created_at: new Date().toISOString()
+                };
+
+                await fetch(`${API_URL}/sessions`, {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ action: 'login', login: login, password: pass })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(sessionData)
                 });
-                const data = await res.json();
-                if (data.success) {
-                    showMessage('success', 'Успешный вход! Перенаправляем...');
-                    setTimeout(() => window.location.href = 'index.html', 1500);
-                } else showMessage('error', data.message);
-            } catch { showMessage('error', 'Ошибка соединения'); }
-            btn.disabled = false; btn.textContent = 'Войти';
+
+                // Сохраняем сессию в localStorage
+                const sessionInfo = {
+                    token: token,
+                    expires_at: expires_at,
+                    user: {
+                        id: user.id,
+                        firstname: user.firstname,
+                        lastname: user.lastname,
+                        email: user.email,
+                        nickname: user.nickname
+                    }
+                };
+                localStorage.setItem('auth_session', JSON.stringify(sessionInfo));
+
+                showMessage('success', 'Успешный вход! Перенаправляем...');
+                setTimeout(() => {
+                    showUserInfo(sessionInfo.user);
+                }, 1000);
+            } catch (err) {
+                showMessage('error', 'Сервер недоступен. Запустите: npm run server');
+            }
+            
+            btn.disabled = false;
+            btn.textContent = 'Войти';
         });
 
         // Сброс ошибок при вводе
@@ -340,5 +609,7 @@
             });
         });
     </script>
+
+<script src="settings.js" defer></script>
 </body>
 </html>

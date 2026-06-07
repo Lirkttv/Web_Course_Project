@@ -10,24 +10,125 @@
     <link rel="stylesheet" href="indexcss.css">
 </head>
 <body>
+<!-- ПРЕЛОАДЕР -->
+<div class="preloader" id="preloader">
+    <div class="preloader__spinner">
+        <div class="preloader__flame">🔥</div>
+    </div>
+    <p class="preloader__text">Загрузка...</p>
+</div>
 
+<!-- ПАНЕЛЬ НАСТРОЕК -->
+<div class="settings-panel" id="settingsPanel">
+    <button class="settings-panel__toggle" id="settingsToggle" aria-label="Настройки">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+    </button>
+    
+    <div class="settings-panel__content" id="settingsContent">
+        <div class="settings-panel__header">
+            <h3 class="settings-panel__title">Настройки</h3>
+            <button class="settings-panel__close" id="settingsClose" aria-label="Закрыть">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="settings-panel__body">
+            <!-- Язык -->
+            <div class="settings-group">
+                <label class="settings-label">Язык интерфейса</label>
+                <select class="settings-select" id="langSelect">
+                    <option value="ru">🇺 Русский</option>
+                    <option value="en">🇬🇧 English</option>
+                    <option value="by">🇾 Беларуская</option>
+                </select>
+            </div>
+
+            <!-- Цветовая палитра -->
+            <div class="settings-group">
+                <label class="settings-label">Цветовая палитра</label>
+                <div class="settings-colors">
+                    <button class="settings-color active" data-color="#8B2E35" style="background: #8B2E35;" title="Бордовый"></button>
+                    <button class="settings-color" data-color="#2563EB" style="background: #2563EB;" title="Синий"></button>
+                    <button class="settings-color" data-color="#059669" style="background: #059669;" title="Зеленый"></button>
+                    <button class="settings-color" data-color="#7C3AED" style="background: #7C3AED;" title="Фиолетовый"></button>
+                    <button class="settings-color" data-color="#DC2626" style="background: #DC2626;" title="Красный"></button>
+                    <button class="settings-color" data-color="#D97706" style="background: #D97706;" title="Оранжевый"></button>
+                </div>
+            </div>
+
+            <!-- Размер шрифта -->
+            <div class="settings-group">
+                <label class="settings-label">Размер шрифта</label>
+                <div class="settings-range">
+                    <input type="range" id="fontSizeRange" min="14" max="20" value="16" step="1">
+                    <span class="settings-range__value" id="fontSizeValue">16px</span>
+                </div>
+            </div>
+
+            <!-- Анимации -->
+            <div class="settings-group">
+                <label class="settings-label">Анимации</label>
+                <label class="settings-toggle">
+                    <input type="checkbox" id="animationsToggle" checked>
+                    <span class="settings-toggle__slider"></span>
+                    <span class="settings-toggle__text">Включены</span>
+                </label>
+            </div>
+
+            <!-- Параллакс -->
+            <div class="settings-group">
+                <label class="settings-label">Эффект параллакса</label>
+                <label class="settings-toggle">
+                    <input type="checkbox" id="parallaxToggle" checked>
+                    <span class="settings-toggle__slider"></span>
+                    <span class="settings-toggle__text">Включен</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="settings-panel__footer">
+            <button class="btn btn--outline btn--full" id="resetSettings">Сбросить настройки</button>
+        </div>
+    </div>
+</div>
     <!-- ШАПКА -->
     <header class="header">
         <div class="container header__inner">
+            <!-- Кнопка меню слева -->
+            <button class="header-menu-btn" id="headerMenuBtn">
+                <svg class="header-menu-btn__icon header-menu-btn__icon--close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+                <svg class="header-menu-btn__icon header-menu-btn__icon--open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+                <span class="header-menu-btn__text">Все разделы</span>
+            </button>
+
             <nav class="nav" id="nav">
                 <ul class="nav__list">
                     <li><a href="#works" class="nav__link">Состав работ</a></li>
                     <li><a href="#calc" class="nav__link">Рассчитать</a></li>
+                    <li><a href="products.html" class="nav__link">Каталог</a></li>
                     <li><a href="#portfolio" class="nav__link">Наши работы</a></li>
                     <li><a href="#video" class="nav__link">Видеообзор</a></li>
                     <li><a href="#reviews" class="nav__link">Отзывы</a></li>
+                    <li><a href="#faq" class="nav__link">Вопросы</a></li>
                 </ul>
             </nav>
             <div class="header__contacts">
-                <a href="tel:+73333333333" class="header__phone">+7 333 333 33 33</a>
+                <a href="tel:+375257486784" class="header__phone">+375 25 748 67 84</a>
                 <a href="auth.html" class="header__auth-link">Войти</a>
                 
-                <!-- Кнопка смены темы -->
                 <button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">
                     <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -44,6 +145,14 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
+                
+                <!-- НОВАЯ КНОПКА ДЛЯ СЛАБОВИДЯЩИХ -->
+                <button class="accessibility-toggle" id="accessibilityToggle" aria-label="Версия для слабовидящих">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>
 
                 <a href="#callback" class="btn btn--primary">Заказать звонок</a>
             </div>
@@ -51,7 +160,90 @@
                 <span></span><span></span><span></span>
             </button>
         </div>
+
+        <!-- Выпадающее меню -->
+        <div class="header-dropdown" id="headerDropdown">
+            <div class="container">
+                <nav class="header-dropdown__nav">
+                    <a href="#works" class="header-dropdown__link">Состав работ</a>
+                    <a href="#calc" class="header-dropdown__link">Рассчитать</a>
+                    <a href="products.html" class="header-dropdown__link">Каталог</a>
+                    <a href="#portfolio" class="header-dropdown__link">Наши работы</a>
+                    <a href="#video" class="header-dropdown__link">Видеообзор</a>
+                    <a href="#reviews" class="header-dropdown__link">Отзывы</a>
+                    <a href="#faq" class="header-dropdown__link">Ответы на вопросы</a>
+                    <a href="#stores" class="header-dropdown__link">Наши магазины</a>
+                </nav>
+            </div>
+        </div>
     </header>
+
+    <!-- ПОДМЕНЮ ДЛЯ СЛАБОВИДЯЩИХ -->
+<div class="accessibility-panel" id="accessibilityPanel">
+    <div class="accessibility-panel__header">
+        <h3 class="accessibility-panel__title">Версия для слабовидящих</h3>
+        <button class="accessibility-panel__close" id="accessibilityClose" aria-label="Закрыть">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+
+    <div class="accessibility-panel__body">
+        <!-- Размер шрифта -->
+        <div class="accessibility-group">
+            <label class="accessibility-label">Размер шрифта</label>
+            <div class="accessibility-font-sizes">
+                <button class="accessibility-font-btn" data-size="16" title="Маленький">
+                    <span style="font-size: 14px;">А</span>
+                </button>
+                <button class="accessibility-font-btn" data-size="20" title="Средний">
+                    <span style="font-size: 18px;">А</span>
+                </button>
+                <button class="accessibility-font-btn active" data-size="26" title="Большой">
+                    <span style="font-size: 24px;">А</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Цветовая схема -->
+        <div class="accessibility-group">
+            <label class="accessibility-label">Цветовая схема</label>
+            <div class="accessibility-colors">
+                <button class="accessibility-color-btn" data-scheme="bw" title="Чёрный фон, белый шрифт" style="background: #000; border: 2px solid #fff;">
+                    <span style="color: #fff;">Аа</span>
+                </button>
+                <button class="accessibility-color-btn" data-scheme="bg" title="Чёрный фон, зелёный шрифт" style="background: #000; border: 2px solid #0f0;">
+                    <span style="color: #0f0;">Аа</span>
+                </button>
+                <button class="accessibility-color-btn" data-scheme="wb" title="Белый фон, чёрный шрифт" style="background: #fff; border: 2px solid #000;">
+                    <span style="color: #000;">Аа</span>
+                </button>
+                <button class="accessibility-color-btn" data-scheme="bc" title="Бежевый фон, коричневый шрифт" style="background: #f5e6d3; border: 2px solid #6b4423;">
+                    <span style="color: #6b4423;">Аа</span>
+                </button>
+                <button class="accessibility-color-btn" data-scheme="bb" title="Голубой фон, тёмно-синий шрифт" style="background: #cce5ff; border: 2px solid #003366;">
+                    <span style="color: #003366;">Аа</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Изображения -->
+        <div class="accessibility-group">
+            <label class="accessibility-label">Изображения</label>
+            <label class="accessibility-switch">
+                <input type="checkbox" id="imagesToggle" checked>
+                <span class="accessibility-switch__slider"></span>
+                <span class="accessibility-switch__text" id="imagesToggleText">Показаны</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="accessibility-panel__footer">
+        <button class="btn btn--outline btn--full" id="resetAccessibility">Сбросить настройки</button>
+    </div>
+</div>
 
     <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="hero">
@@ -65,7 +257,7 @@
         </div>
 
         <div class="hero__actions">
-            <a href="tel:+73333333333" class="action-btn">
+            <a href="tel:+375257486784" class="action-btn">
                 <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
                 Заказать звонок
             </a>
@@ -86,7 +278,7 @@
         </div>
 
         <div class="floating-btns">
-            <a href="tel:+73333333333" class="floating-btn">
+            <a href="tel:+375257486784" class="floating-btn">
                 <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
             </a>
             <a href="#calendar" class="floating-btn">
@@ -188,107 +380,117 @@
         </div>
     </section>
 
-    <!-- ПРЕДВАРИТЕЛЬНЫЙ РАСЧЁТ -->
-    <section class="calculator" id="calc">
-        <div class="container">
-            <h2 class="section-title">Предварительный расчёт</h2>
-            <p class="calculator__desc">Предлагаем вам посмотреть на внешний вид вашей будущей гриль-кухни и получить предварительный расчет стоимости изготовления. Ваши персональные данные не потребуются.<br>Выберите соответствующие характеристики гриль-кухни:</p>
-            
-            <div class="calculator__card">
-                <div class="calculator__image">
-                    <img src="images/246.jpg" alt="Гриль-кухня" class="calculator__img">
+   <!-- ПРЕДВАРИТЕЛЬНЫЙ РАСЧЁТ -->
+<section class="calculator" id="calc">
+    <div class="container">
+        <h2 class="section-title">Предварительный расчёт</h2>
+        <p class="calculator__desc">Соберите свою идеальную гриль-кухню в нашем онлайн-конфигураторе. Выберите параметры и получите точный расчёт стоимости за 30 секунд.</p>
+        
+        <div class="calculator__card">
+            <div class="calculator__image">
+                <img src="images/246.jpg" alt="Гриль-кухня" class="calculator__img">
+                <div class="calculator__image-overlay">
+                    <span class="calculator__image-badge">🔥 Хит продаж</span>
                 </div>
+            </div>
+            
+            <div class="calculator__content">
+                <h3 class="calculator__content-title">Быстрый выбор параметров</h3>
                 
-                <div class="calculator__content">
-                    <div class="calculator__row">
-                        <div class="calculator__group">
-                            <h3 class="calculator__group-title">Материал фасада</h3>
-                            <div class="calculator__options">
-                                <label class="calculator__option">
-                                    <input type="radio" name="material" value="steel" checked>
-                                    <span class="calculator__radio"></span>
-                                    <span class="calculator__label">нержавеющая сталь</span>
-                                </label>
-                                <label class="calculator__option">
-                                    <input type="radio" name="material" value="composite">
-                                    <span class="calculator__radio"></span>
-                                    <span class="calculator__label">композит</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="calculator__group">
-                            <h3 class="calculator__group-title">Тип размещения</h3>
-                            <div class="calculator__options">
-                                <label class="calculator__option">
-                                    <input type="radio" name="placement" value="open" checked>
-                                    <span class="calculator__radio"></span>
-                                    <span class="calculator__label">открытая терраса</span>
-                                </label>
-                                <label class="calculator__option">
-                                    <input type="radio" name="placement" value="closed">
-                                    <span class="calculator__radio"></span>
-                                    <span class="calculator__label">закрытая терраса</span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="calculator__group">
-                            <h3 class="calculator__group-title">Размер</h3>
-                            <div class="calculator__options">
-                                <label class="calculator__option">
-                                    <input type="radio" name="size" value="2.2" checked>
-                                    <span class="calculator__radio"></span>
-                                    <span class="calculator__label">2,2 п.м</span>
-                                </label>
-                                <label class="calculator__option">
-                                    <input type="radio" name="size" value="2.8">
-                                    <span class="calculator__radio"></span>
-                                    <span class="calculator__label">2,8 п.м</span>
-                                </label>
-                                <label class="calculator__option">
-                                    <input type="radio" name="size" value="3+">
-                                    <span class="calculator__radio"></span>
-                                    <span class="calculator__label">более 3 п.м</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="calculator__group calculator__group--full">
-                        <h3 class="calculator__group-title">Конфигурация</h3>
-                        <div class="calculator__options calculator__options--horizontal">
+                <div class="calculator__row">
+                    <div class="calculator__group">
+                        <h3 class="calculator__group-title">Материал фасада</h3>
+                        <div class="calculator__options">
                             <label class="calculator__option">
-                                <input type="radio" name="config" value="straight" checked>
+                                <input type="radio" name="material" value="steel" checked>
                                 <span class="calculator__radio"></span>
-                                <span class="calculator__label">Прямая</span>
+                                <span class="calculator__label">Нержавеющая сталь</span>
                             </label>
                             <label class="calculator__option">
-                                <input type="radio" name="config" value="corner">
+                                <input type="radio" name="material" value="composite">
                                 <span class="calculator__radio"></span>
-                                <span class="calculator__label">Угловая</span>
-                            </label>
-                            <label class="calculator__option">
-                                <input type="radio" name="config" value="u-shape">
-                                <span class="calculator__radio"></span>
-                                <span class="calculator__label">П-образная</span>
-                            </label>
-                            <label class="calculator__option">
-                                <input type="radio" name="config" value="island">
-                                <span class="calculator__radio"></span>
-                                <span class="calculator__label">С островком</span>
+                                <span class="calculator__label">Композит HPL</span>
                             </label>
                         </div>
                     </div>
 
-                    <div class="calculator__buttons">
-                        <button type="button" class="btn btn--primary btn--large">Получить расчёт</button>
-                        <button type="button" class="btn btn--outline btn--large">Связь с менеджером</button>
+                    <div class="calculator__group">
+                        <h3 class="calculator__group-title">Тип размещения</h3>
+                        <div class="calculator__options">
+                            <label class="calculator__option">
+                                <input type="radio" name="placement" value="open" checked>
+                                <span class="calculator__radio"></span>
+                                <span class="calculator__label">Открытая терраса</span>
+                            </label>
+                            <label class="calculator__option">
+                                <input type="radio" name="placement" value="closed">
+                                <span class="calculator__radio"></span>
+                                <span class="calculator__label">Закрытая терраса</span>
+                            </label>
+                        </div>
                     </div>
+
+                    <div class="calculator__group">
+                        <h3 class="calculator__group-title">Размер</h3>
+                        <div class="calculator__options">
+                            <label class="calculator__option">
+                                <input type="radio" name="size" value="2.2" checked>
+                                <span class="calculator__radio"></span>
+                                <span class="calculator__label">2,2 п.м</span>
+                            </label>
+                            <label class="calculator__option">
+                                <input type="radio" name="size" value="2.8">
+                                <span class="calculator__radio"></span>
+                                <span class="calculator__label">2,8 п.м</span>
+                            </label>
+                            <label class="calculator__option">
+                                <input type="radio" name="size" value="3+">
+                                <span class="calculator__radio"></span>
+                                <span class="calculator__label">Более 3 п.м</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator__group calculator__group--full">
+                    <h3 class="calculator__group-title">Конфигурация</h3>
+                    <div class="calculator__options calculator__options--horizontal">
+                        <label class="calculator__option">
+                            <input type="radio" name="config" value="straight" checked>
+                            <span class="calculator__radio"></span>
+                            <span class="calculator__label">Прямая</span>
+                        </label>
+                        <label class="calculator__option">
+                            <input type="radio" name="config" value="corner">
+                            <span class="calculator__radio"></span>
+                            <span class="calculator__label">Угловая</span>
+                        </label>
+                        <label class="calculator__option">
+                            <input type="radio" name="config" value="u-shape">
+                            <span class="calculator__radio"></span>
+                            <span class="calculator__label">П-образная</span>
+                        </label>
+                        <label class="calculator__option">
+                            <input type="radio" name="config" value="island">
+                            <span class="calculator__radio"></span>
+                            <span class="calculator__label">С островком</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="calculator__buttons">
+                    <a href="configurator.html" class="btn btn--primary btn--large">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                        Открыть конфигуратор
+                    </a>
+                    <button type="button" class="btn btn--outline btn--large" data-modal="managerModal">Связь с менеджером</button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- НАШИ РАБОТЫ -->
     <section class="portfolio-full" id="portfolio">
@@ -454,6 +656,540 @@
         </div>
     </section>
 
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="faq__bg">
+            <img src="images/backfaq.png" alt="Фон" class="faq__bg-img">
+        </div>
+        
+        <div class="container">
+            <h2 class="section-title section-title--white">Ответы на вопросы</h2>
+            
+            <div class="faq__wrapper">
+                <div class="faq__accordion">
+                    <div class="faq__item active">
+                        <div class="faq__question">
+                            <h3 class="faq__question-title">Можно ли устанавливать кухню на улице?</h3>
+                            <button class="faq__toggle" aria-label="Развернуть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq__answer">
+                            <p>Для изготовления гриль-кухонь мы используем композитный материал HPL — органический материал, изготовленный из целлюлозы, пропитанной смолами. HPL бывает двух типов — для улицы и для помещений. Уличный HPL устойчив к влаге и перепадам температур, так же как и наши грили, поэтому кухню можно установить на улице, на открытой местности, или под козырьком.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq__item">
+                        <div class="faq__question">
+                            <h3 class="faq__question-title">Что такое современный композитный HPL материал?</h3>
+                            <button class="faq__toggle" aria-label="Развернуть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq__answer">
+                            <p>HPL (High Pressure Laminate) — это высокопрочный композитный материал, состоящий из нескольких слоев бумаги, пропитанных термореактивными смолами и спрессованных под высоким давлением. Материал устойчив к механическим повреждениям, влаге, УФ-излучению и перепадам температур от -50°C до +90°C.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq__item">
+                        <div class="faq__question">
+                            <h3 class="faq__question-title">Как ухаживать за гриль-кухней?</h3>
+                            <button class="faq__toggle" aria-label="Развернуть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq__answer">
+                            <p>Уход за гриль-кухней прост: достаточно регулярно протирать поверхности влажной тканью с мягким моющим средством. Избегайте абразивных чистящих средств и жестких губок. Для нержавеющей стали рекомендуем использовать специальные средства для ухода. HPL материал достаточно промыть водой с мылом.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq__item">
+                        <div class="faq__question">
+                            <h3 class="faq__question-title">Сколько времени занимает изготовление кухни?</h3>
+                            <button class="faq__toggle" aria-label="Развернуть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq__answer">
+                            <p>Срок изготовления гриль-кухни составляет от 14 до 21 рабочего дня с момента утверждения дизайн-проекта и внесения предоплаты. Точные сроки зависят от сложности конфигурации и выбранных материалов. Срочные заказы обсуждаются индивидуально.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq__item">
+                        <div class="faq__question">
+                            <h3 class="faq__question-title">Можно изготовить кухню по моим индивидуальным размерам?</h3>
+                            <button class="faq__toggle" aria-label="Развернуть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq__answer">
+                            <p>Да, конечно! Мы изготавливаем кухни исключительно по индивидуальным размерам. Наш специалист выезжает на объект для точных замеров, после чего мы разрабатываем дизайн-проект с учетом всех ваших пожеланий и особенностей помещения или территории.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq__item">
+                        <div class="faq__question">
+                            <h3 class="faq__question-title">Есть ли готовые образцы кухонь и где их можно посмотреть?</h3>
+                            <button class="faq__toggle" aria-label="Развернуть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq__answer">
+                            <p>У нас есть шоурум, где вы можете посмотреть образцы материалов, фурнитуры и готовые решения. Также мы организуем выезд на объекты, где уже установлены наши кухни. Запишитесь на просмотр, и наш менеджер согласует удобное время для посещения.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq__item">
+                        <div class="faq__question">
+                            <h3 class="faq__question-title">Можно ли установить керамический и газовый гриль в одном проекте?</h3>
+                            <button class="faq__toggle" aria-label="Развернуть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq__answer">
+                            <p>Да, мы можем подготовить модули под установку различных типов грилей — керамических, газовых, электрических. Важно заранее сообщить нам о планируемом оборудовании, чтобы мы учли все технические требования при проектировании и подвели необходимые коммуникации.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq__item">
+                        <div class="faq__question">
+                            <h3 class="faq__question-title">В каком виде гриль-кухня доставляется на адрес?</h3>
+                            <button class="faq__toggle" aria-label="Развернуть ответ">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="faq__answer">
+                            <p>Гриль-кухня доставляется в разобранном виде в специальной упаковке, защищающей от повреждений. Все модули пронумерованы, прилагается подробная инструкция по сборке. Также мы предлагаем услугу профессиональной сборки и установки нашими специалистами с гарантией.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq__contact">
+                    <div class="faq__contact-card">
+                        <h3 class="faq__contact-title">У вас остались вопросы?</h3>
+                        
+                        <form class="faq__form" id="faqForm">
+                            <div class="form-group">
+                                <input type="text" class="form-input form-input--white" placeholder="Имя" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="phone-input">
+                                    <span class="phone-code">+375</span>
+                                    <input type="tel" class="form-input form-input--white" placeholder="(25) 748-67-84" required>
+                                </div>
+                            </div>
+
+                            <div class="faq__contact-methods">
+                                <button type="button" class="faq__contact-btn faq__contact-btn--primary">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                    </svg>
+                                    Звонок
+                                </button>
+                                <button type="button" class="faq__contact-btn">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M11.944 0A12 12 0 1 0 24 12.056A12.01 12.01 0 0 0 11.944 0Zm5.65 8.12-1.72 8.12c-.13.58-.47.72-.95.45l-2.64-1.95-1.27 1.22c-.14.14-.26.26-.53.26l.19-2.67 4.86-4.39c.21-.19-.05-.29-.33-.11l-6 3.79-2.58-.81c-.56-.18-.57-.56.12-.83l10.08-3.89c.47-.17.88.11.73.83Z"/>
+                                    </svg>
+                                    Telegram
+                                </button>
+                                <button type="button" class="faq__contact-btn">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                                    </svg>
+                                    Whatsapp
+                                </button>
+                            </div>
+
+                            <button type="submit" class="btn btn--primary btn--full">Оставить заявку</button>
+                            
+                            <p class="faq__privacy">Заполняя данную форму я даю согласие на обработку персональных данных и принимаю условия политики конфиденциальности</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ДЕЛЕРЫ -->
+    <section class="dealers" id="dealers">
+        <div class="container">
+            <h2 class="section-title">Мы являемся дилером</h2>
+            
+            <div class="dealers__slider">
+                <button class="dealers__arrow dealers__arrow--prev" aria-label="Предыдущий слайд">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+
+                <div class="dealers__track" id="dealersTrack">
+                    <div class="dealers__slide active">
+                        <img src="images/л1.png" alt="Primo Grills and Smokers" class="dealers__logo">
+                    </div>
+                    <div class="dealers__slide">
+                        <img src="images/л2.png" alt="Napoleon Gourmet Grills" class="dealers__logo">
+                    </div>
+                    <div class="dealers__slide">
+                        <img src="images/л3.png" alt="Big Green Egg" class="dealers__logo">
+                    </div>
+                    <div class="dealers__slide">
+                        <img src="images/л4.png" alt="Broil King" class="dealers__logo">
+                    </div>
+                    <div class="dealers__slide">
+                        <img src="images/л5.png" alt="Monolith Kamado Grill" class="dealers__logo">
+                    </div>
+                </div>
+
+                <button class="dealers__arrow dealers__arrow--next" aria-label="Следующий слайд">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="dealers__pagination" id="dealersPagination">
+                <span class="dealers__dot active" data-index="0"></span>
+                <span class="dealers__dot" data-index="1"></span>
+                <span class="dealers__dot" data-index="2"></span>
+                <span class="dealers__dot" data-index="3"></span>
+                <span class="dealers__dot" data-index="4"></span>
+            </div>
+        </div>
+    </section>
+
+        <!-- МАГАЗИНЫ С КАРТОЙ -->
+        <section class="stores" id="stores">
+            <div class="container">
+                <h2 class="section-title">Наши магазины</h2>
+                
+                <div class="stores__layout">
+                    <div class="stores__cards">
+                        <div class="stores__card">
+                            <div class="stores__image">
+                                <img src="images/к1.png" alt="Магазин в Москве - Сосенское" class="stores__img">
+                            </div>
+                            <div class="stores__info">
+                                <h3 class="stores__city">Москва</h3>
+                                <p class="stores__address">Калужское шоссе, поселение Сосенское, ул. Сосновская 3Б</p>
+                                <a href="https://yandex.ru/maps/?text=55.5533,37.4533" target="_blank" class="stores__map-link">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    На карте
+                                </a>
+                            </div>
+                        </div>
+    
+                        <div class="stores__card">
+                            <div class="stores__image">
+                                <img src="images/к2.png" alt="Магазин в Москве - Десна" class="stores__img">
+                            </div>
+                            <div class="stores__info">
+                                <h3 class="stores__city">Москва</h3>
+                                <p class="stores__address">Калужское шоссе, поселение Десеновское, деревня Десна, ул. Рябиновая 15</p>
+                                <a href="https://yandex.ru/maps/?text=55.5233,37.4233" target="_blank" class="stores__map-link">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    На карте
+                                </a>
+                            </div>
+                        </div>
+    
+                        <div class="stores__card">
+                            <div class="stores__image">
+                                <img src="images/к3.png" alt="Магазин в Санкт-Петербурге" class="stores__img">
+                            </div>
+                            <div class="stores__info">
+                                <h3 class="stores__city">Санкт-Петербург</h3>
+                                <p class="stores__address">Межевой канал 5 АХ</p>
+                                <a href="https://yandex.ru/maps/?text=59.9343,30.3351" target="_blank" class="stores__map-link">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    На карте
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Яндекс Карта -->
+                    <div class="stores__map">
+                        <div id="yandexMap" style="width: 100%; height: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- ФУТЕР -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__col footer__col--nav">
+                    <h4 class="footer__title">Навигация по сайту</h4>
+                    <nav class="footer__nav">
+                        <a href="#advantages" class="footer__link">Преимущества</a>
+                        <a href="#works" class="footer__link">Состав работ</a>
+                        <a href="#calc" class="footer__link">Предварительный расчет</a>
+                        <a href="products.html" class="footer__link">Каталог</a>
+                        <a href="#portfolio" class="footer__link">Наши работы</a>
+                        <a href="#faq" class="footer__link">Ответы на вопросы</a>
+                    </nav>
+                </div>
+
+                <div class="footer__col footer__col--stores">
+                    <h4 class="footer__title">Магазины</h4>
+                    <div class="footer__stores">
+                        <div class="footer__store">
+                            <svg class="footer__store-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <p class="footer__store-text">Москва, Калужское шоссе, поселение Сосенское, ул. Сосновская 3Б</p>
+                        </div>
+                        <div class="footer__store">
+                            <svg class="footer__store-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <p class="footer__store-text">Москва, Калужское шоссе, поселение Десеновское, деревня Десна, ул. Рябиновая 15</p>
+                        </div>
+                        <div class="footer__store">
+                            <svg class="footer__store-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <p class="footer__store-text">Санкт-Петербург, Межевой канал 5 АХ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer__col footer__col--contact">
+                    <a href="tel:+375257486784" class="footer__phone">+375 25 748 67 84</a>
+                    <a href="#callback" class="btn btn--primary btn--footer">Заказать звонок</a>
+                    
+                    <div class="footer__socials">
+                        <a href="#" class="footer__social">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M11.944 0A12 12 0 1 0 24 12.056A12.01 12.01 0 0 0 11.944 0Zm5.65 8.12-1.72 8.12c-.13.58-.47.72-.95.45l-2.64-1.95-1.27 1.22c-.14.14-.26.26-.53.26l.19-2.67 4.86-4.39c.21-.19-.05-.29-.33-.11l-6 3.79-2.58-.81c-.56-.18-.57-.56.12-.83l10.08-3.89c.47-.17.88.11.73.83Z"/>
+                            </svg>
+                            Telegram
+                        </a>
+                        <a href="#" class="footer__social">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                            </svg>
+                            Whatsapp
+                        </a>
+                    </div>
+
+                    <div class="footer__legal">
+                        <a href="#" class="footer__legal-link">Политика конфиденциальности</a>
+                        <a href="#" class="footer__legal-link">Пользовательское соглашение</a>
+                        <a href="#" class="footer__legal-link">Публичная оферта</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- МОДАЛЬНЫЕ ОКНА -->
+    
+    <!-- Модалка: Заказать звонок -->
+    <div class="modal" id="callbackModal">
+        <div class="modal__overlay" data-close-modal></div>
+        <div class="modal__content">
+            <button class="modal__close" data-close-modal aria-label="Закрыть">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <h3 class="modal__title">Заказать звонок</h3>
+            <p class="modal__subtitle">Оставьте ваш номер телефона, и мы перезвоним вам в течение 15 минут</p>
+            
+            <form class="modal__form" id="callbackForm">
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <div class="phone-input">
+                        <span class="phone-code">+375</span>
+                        <input type="tel" class="form-input" placeholder="(25) 748-67-84" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full">Перезвоните мне</button>
+                <p class="modal__privacy">Нажимаю кнопку, вы даете согласие на обработку персональных данных</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модалка: Получить расчёт -->
+    <div class="modal" id="calculationModal">
+        <div class="modal__overlay" data-close-modal></div>
+        <div class="modal__content modal__content--large">
+            <button class="modal__close" data-close-modal aria-label="Закрыть">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <h3 class="modal__title">Предварительный расчёт</h3>
+            <p class="modal__subtitle">Заполните форму и получите расчёт стоимости вашей гриль-кухни</p>
+            
+            <form class="modal__form" id="calculationForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-input" placeholder="Телефон" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-input" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-input" placeholder="Пожелания к проекту (необязательно)" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full">Получить расчёт</button>
+                <p class="modal__privacy">Нажимаю кнопку, вы даете согласие на обработку персональных данных</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модалка: Связь с менеджером -->
+    <div class="modal" id="managerModal">
+        <div class="modal__overlay" data-close-modal></div>
+        <div class="modal__content">
+            <button class="modal__close" data-close-modal aria-label="Закрыть">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <h3 class="modal__title">Связь с менеджером</h3>
+            <p class="modal__subtitle">Заполните форму, и наш специалист свяжется с вами для консультации</p>
+            
+            <div class="modal__contacts">
+                <a href="tel:+375257486784" class="modal__phone-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    +375 25 748 67 84
+                </a>
+                <div class="modal__socials">
+                    <a href="#" class="modal__social-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.944 0A12 12 0 1 0 24 12.056A12.01 12.01 0 0 0 11.944 0Zm5.65 8.12-1.72 8.12c-.13.58-.47.72-.95.45l-2.64-1.95-1.27 1.22c-.14.14-.26.26-.53.26l.19-2.67 4.86-4.39c.21-.19-.05-.29-.33-.11l-6 3.79-2.58-.81c-.56-.18-.57-.56.12-.83l10.08-3.89c.47-.17.88.11.73.83Z"/>
+                        </svg>
+                        Telegram
+                    </a>
+                    <a href="#" class="modal__social-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                        </svg>
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+            
+            <form class="modal__form" id="managerForm">
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" class="form-input" placeholder="Телефон" required>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модалка: Видео -->
+    <div class="modal modal--video" id="videoModal">
+        <div class="modal__overlay" data-close-modal></div>
+        <div class="modal__content modal__content--video">
+            <button class="modal__close" data-close-modal aria-label="Закрыть">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal__video-container">
+                <div class="modal__video-placeholder">
+                    <p>Здесь будет видео с YouTube или другим плеером</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка: Подробнее об отзыве -->
+    <div class="modal" id="reviewModal">
+        <div class="modal__overlay" data-close-modal></div>
+        <div class="modal__content">
+            <button class="modal__close" data-close-modal aria-label="Закрыть">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal__review">
+                <img src="images/1отзыв.jpg" alt="Отзыв" class="modal__review-img" id="modalReviewImg">
+                <h3 class="modal__review-name" id="modalReviewName">Дмитрий К.</h3>
+                <p class="modal__review-text" id="modalReviewText">Отличная кухня, быстро договорились, произвели замеры и разработали проект! Отличная компания!</p>
+                <div class="modal__review-rating">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#FFD700" stroke="#FFD700" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+           <!-- Яндекс Карты API -->
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_API_ключ&lang=ru_RU" type="text/javascript"></script>
+
+    <script src="settings.js" defer></script>
     <script src="Untitled-1.js" defer></script>
 </body>
 </html>
