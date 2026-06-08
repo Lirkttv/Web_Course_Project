@@ -1,2 +1,4 @@
-# Web_Course_Project
+# Web\_CourseProject
+
 Mandrikov Ivan Asoir-241
+
