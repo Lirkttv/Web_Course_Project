@@ -1,0 +1,322 @@
+/* ===== СТРАНИЦА АВТОРИЗАЦИИ ===== */
+.auth-user-info { 
+    text-align: center; 
+    padding: 20px 0; 
+    position: relative; 
+}
+
+.auth-user-avatar {
+    width: 80px; 
+    height: 80px; 
+    border-radius: 50%;
+    background: var(--color-primary); 
+    color: #fff;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    font-size: 2rem; 
+    font-weight: 700; 
+    margin: 0 auto 15px;
+    text-transform: uppercase;
+}
+
+.auth-user-name { 
+    font-size: 1.3rem; 
+    font-weight: 700; 
+    color: var(--text-primary); 
+    margin-bottom: 5px; 
+}
+
+.auth-user-email { 
+    color: var(--text-secondary); 
+    font-size: 0.9rem; 
+    margin-bottom: 5px; 
+}
+
+.auth-user-nick { 
+    color: var(--color-primary); 
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    margin-bottom: 25px; 
+}
+
+.auth-user-actions { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+/* ===== ИНДИКАТОР СИЛЫ ПАРОЛЯ ===== */
+.password-strength {
+    margin-top: 8px; 
+    height: 4px; 
+    background: var(--border-color);
+    border-radius: 2px; 
+    overflow: hidden;
+}
+
+.password-strength::after {
+    content: ''; 
+    display: block; 
+    height: 100%; 
+    width: 0;
+    transition: all 0.3s ease;
+}
+
+.password-strength.weak::after { 
+    width: 33%; 
+    background: #e74c3c; 
+}
+
+.password-strength.medium::after { 
+    width: 66%; 
+    background: #f39c12; 
+}
+
+.password-strength.strong::after { 
+    width: 100%; 
+    background: #27ae60; 
+}
+
+/* ===== КНОПКА АДМИНА ===== */
+.auth-admin-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: 3px solid #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
+    transition: all 0.3s ease;
+    padding: 0;
+    z-index: 100;
+    animation: adminPulse 2s infinite;
+}
+
+@keyframes adminPulse {
+    0%, 100% { 
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5); 
+    }
+    50% { 
+        box-shadow: 0 4px 25px rgba(102, 126, 234, 0.9); 
+    }
+}
+
+.auth-admin-btn svg { 
+    width: 22px; 
+    height: 22px; 
+}
+
+.auth-admin-btn:hover { 
+    transform: scale(1.15); 
+}
+
+/* ===== АДАПТИВ ДЛЯ ПЛАНШЕТОВ (≤768px) ===== */
+@media (max-width: 768px) {
+    .auth-page {
+        padding: 20px 15px;
+    }
+    
+    .auth-card {
+        padding: 35px 25px;
+        max-width: 100%;
+    }
+    
+    .auth-logo h2 {
+        font-size: 1.7rem;
+    }
+    
+    .auth-logo p {
+        font-size: 0.9rem;
+    }
+    
+    .auth-user-avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 1.7rem;
+    }
+    
+    .auth-user-name {
+        font-size: 1.2rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .auth-admin-btn {
+        width: 40px;
+        height: 40px;
+        top: 12px;
+        right: 12px;
+    }
+    
+    .auth-admin-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* ===== АДАПТИВ ДЛЯ МОБИЛЬНЫХ (≤480px) ===== */
+@media (max-width: 480px) {
+    .auth-page {
+        padding: 15px 10px;
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-start;
+        padding-top: 30px;
+    }
+    
+    .auth-card {
+        padding: 30px 20px;
+        border-radius: 20px;
+    }
+    
+    .auth-logo {
+        margin-bottom: 25px;
+    }
+    
+    .auth-logo h2 {
+        font-size: 1.5rem;
+    }
+    
+    .auth-logo p {
+        font-size: 0.85rem;
+    }
+    
+    .auth-tabs {
+        margin-bottom: 20px;
+    }
+    
+    .auth-tab {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
+    .auth-user-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+    }
+    
+    .auth-user-name {
+        font-size: 1.1rem;
+        margin-bottom: 3px;
+    }
+    
+    .auth-user-email {
+        font-size: 0.85rem;
+    }
+    
+    .auth-user-nick {
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+    }
+    
+    .auth-user-actions {
+        gap: 8px;
+    }
+    
+    .auth-user-actions .btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-label {
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+    }
+    
+    .form-input {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+    }
+    
+    .auth-submit {
+        padding: 14px;
+        font-size: 0.95rem;
+        margin-top: 8px;
+    }
+    
+    .radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .nickname-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .btn-icon {
+        width: 100%;
+        height: 44px;
+    }
+    
+    .checkbox-label {
+        font-size: 0.85rem;
+    }
+    
+    .auth-back {
+        margin-top: 20px;
+    }
+    
+    .auth-back a {
+        font-size: 0.85rem;
+    }
+    
+    .auth-admin-btn {
+        width: 36px;
+        height: 36px;
+        top: 10px;
+        right: 10px;
+        border-width: 2px;
+    }
+    
+    .auth-admin-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .error-message {
+        font-size: 0.75rem;
+    }
+    
+    #manualPassFields .form-group:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* ===== ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (≤360px) ===== */
+@media (max-width: 360px) {
+    .auth-card {
+        padding: 25px 15px;
+    }
+    
+    .auth-logo h2 {
+        font-size: 1.3rem;
+    }
+    
+    .form-input {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .auth-submit {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+}
